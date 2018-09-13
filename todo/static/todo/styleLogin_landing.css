@@ -1,0 +1,155 @@
+section{
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: border-box;
+    height: 500px;
+}
+
+html, body, footer {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#curve1{
+    position: absolute;
+    bottom: 50%;
+    width: 98%;
+    z-index: -1;
+}
+
+#curve_end{
+    position: absolute;
+    bottom: 0%;
+    width: 90%;
+}
+
+#curve_end path{
+    fill: #fff;
+    opacity: 0.8;
+}
+
+#curve1 path{
+    fill: #f6f7f8;
+    opacity: 0.8;
+}
+
+#curve2{
+    bottom: 0;
+    z-index: 1;
+}
+
+#curve3{
+    position: relative;
+    z-index: 2;
+    bottom: 15%;
+    width: 100%;
+    left:0;
+}
+
+#curve3 path{
+    fill: #fff;
+}
+
+#box1{
+    height: 800px;
+    text-align: center;
+
+}
+/*
+ul{
+    bottom: 0;
+    float: center;
+    text-align: left;
+}
+
+ul li{
+    margin: 5px;
+    font-family: sans-serif;
+    font-size: 2.5vh;
+    list-style: none;
+    color: #929aa7;
+}
+
+/*ul li img{
+    fill: var(--darkblue);
+    size: 50%;
+}*/
+
+#box2{
+    width: 98%;
+    padding: 1.5vh;
+    background: linear-gradient(-90deg, var(--lightblue), var(--darkblue));
+}
+
+#box4{
+    margin: 15px;
+    width: 98%;
+    padding: 1.5vh;
+    background: #f6f7f8;
+}
+
+.col-centered{
+    margin: 0 auto;
+    padding: 5px;
+    float: center;
+
+}
+
+#img-si{
+    position: absolute;
+    height: 200px;
+    top: 0;
+}
+
+#box5 .img-si{
+    max-height: 400px;
+    position: relative;
+    display: inline-block;
+
+}
+
+#curve_end{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+#curve_end path{
+    fill: #f6f7f8;
+}
+
+#sec_box5{
+    height: 100px;
+}
+
+#create_feat{
+    position: absolute;
+    height: auto;
+    width: 100%;
+    top: 0;
+    right: 15%;
+}
+
+#box3{
+    height: 700px;
+}
+
+.sub_description{
+    font-size: 1.8vh;
+}
+
+.list_icon{
+    size: 60%;
+}
+
+.sub_small{
+    font-size: 2vh;
+}
+
+svg {
+    max-width: 100%;
+    x-overflow: hidden;
+}

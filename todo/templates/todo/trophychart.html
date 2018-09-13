@@ -1,0 +1,314 @@
+{% extends 'todo/base.html'%}
+
+{% block body %}
+    {% load staticfiles %}
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'todo/styleTrophyDetail.css' %}" type="text/css"/>
+    <div class="container-fluid mx-auto">
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3><b>Aufgabe:</b> {{trophy.pro_title}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto" id="buttons">
+                {% if many == count %}
+                <a href="{% url 'trophy-done' trophy.id %}" class="btn btn-outline-primary"><i class="fas fa-check"></i> Projekt abschließen</a>
+                {% else %}
+                <a class="align-middle open"><i class="fas fa-check"></i> Projekt abschließen</a>
+                {% endif%}
+                <a href="#" class="btn btn-outline-secondary pareto-popup-trigger"><i class="fas fa-chart-pie"></i> Pareto</a>
+                <a href="{% url 'index'%}" class="btn btn-outline-secondary"><i class="fas fa-tasks"></i> Zurück zum Dashboard</a>
+                <a href="{% url 'trophy-delete' trophy.id %}" class="float-right delete_btn"><i class="fas fa-trash"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Beschreibung und  Dashboard -->
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h5 class="panel-heading p-3 mb-2 text-center text-light rounded"><i class="fas fa-stopwatch"></i> Aktivitäten und Beschreibung</h5>
+            </div>
+        </div>
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <div class="row mx-auto">
+                <div class="col-3 mr-5 border-right align-bottom">
+                    {% include 'todo/js.html' %}
+                    <canvas id="myChart3"></canvas>
+                    <div class="donut-inner">
+                        <h3 class="text-primary float-center">{{status}}</h3>
+                        <p class="text-secondary float-center">{{count}} / {{many}}</p>
+                    </div>
+                    <script>
+                    var ctx = document.getElementById("myChart3").getContext('2d');
+                    var data = {
+                    datasets: [
+                        {
+                            data: [{{count}},{{many}}-{{count}}],
+                            backgroundColor: [
+                                "rgba(10, 128, 226, 1)",
+                                "rgba(204, 204, 204, 0.5)",
+                            ],
+                            hoverBackgroundColor: [
+                                "rgba(36, 112, 250, 1)",
+                                "rgba(0, 0, 0, 0)",
+                            ],
+                            hoverBorderColor: [,"rgba(0, 0, 0, 0)"]
+                        }]
+                    };
+
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                          legend: {
+                            display: false
+                          },
+                          tooltips: {
+                            enabled: false
+                          },
+                          cutoutPercentage: 80,
+                        }
+                    });
+                    </script>
+                </div>
+                <div class="col-8 align-middle">
+                    <canvas id="speedChart" width="10rem"></canvas>
+                    <script>
+                        var speedCanvas = document.getElementById("speedChart");
+                        speedCanvas.height = 3;
+
+                        Chart.defaults.global.defaultFontFamily = "Lato";
+                        Chart.defaults.global.defaultFontSize = 18;
+
+                        var speedData = {
+                          labels: [{% for i in SeriesDates %}'{{ i }}',{% endfor %}],
+                          datasets: [{
+                            label: "Aufgabenabschlüsse",
+                            data: {{ SeriesValues }},
+                            backgroundColor: [
+                                'rgba(20, 95, 190, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(20, 95, 190, 1)',
+                            ],
+                          }]
+                        };
+
+                        var chartOptions = {
+                          legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                              boxWidth: 80,
+                            }
+                          }
+                        };
+
+                        var lineChart = new Chart(speedCanvas, {
+                          type: 'line',
+                          data: speedData,
+                          options: chartOptions
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-3 mr-5 border-right align-middle">
+                    <p class="text-secondary text-center">Bearbeitungsstaus</p>
+                </div>
+                <div class="col-8 mr-5 align-middle">
+                    <p class="text-secondary text-center">Aufgabenabschlüsse im Zeitverlauf</p>
+                </div>
+            </div>
+            <div class="panel panel-primary p-4 rounded col-12 mx-auto">
+                <p class="task_text">{{trophy.pro_desc}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-9 mx-auto">
+                <a href="#" class="btn btn-outline-secondary float-right cd-popup-trigger" title="Bearbeiten">
+                    <i class="fas fa-edit"></i> Bearbeiten</a>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Arbeitsbereich -->
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h5 class="panel-heading p-3 mb-2 text-center text-light rounded"><i class="fas fa-award"></i> Gegenüberstellung</h5>
+            </div>
+        </div>
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <div class="row">
+                <div class="container col-lg-6 col-md-12">
+                    <div class="checklistbar">
+                        <i class="fas fa-star"></i><b> Offene Aufgaben</b>
+                    </div>
+                    <div class="panel panel-primary holder">
+                        <ul class="list-group-flush">
+                            {% for do in trophy.task_set.all%}
+                            {% if do.complete == False %}
+                                {% include 'todo/todo_temp.html'%}
+                            {% endif%}
+                            {% endfor %}
+                            <li class="p-2 text-left new">
+                                <a href="#" id="link" class="text-left p-2 add-btn"><i class="fas fa-plus"></i> Neue Aufgabe</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container col-lg-6 col-md-12">
+                    <div class="checklistbar">
+                        <i class="fas fa-check"></i><b> Abgeschlossene Aufgaben</b>
+                    </div>
+                    <div class="panel panel-primary holder">
+                        <ul class="list-group-flush">
+                            {% for todo in trophy.task_set.all%}
+                            {% if todo.complete == True %}
+                            <li class="list-group-item" id="checked">
+                                <div class="btn-group-left">
+                                    <div class="row checked">
+                                         <i class="fas fa-check"></i><a class="text-secondary ml-2 text-left didit">{{todo.task_title}}</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endif%}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary p-4 rounded col-6 mx-auto">
+        <div class="cd-popup" role="alert">
+            <div class="cd-popup-container">
+                <div class="container-fluid" id="topline">
+                  <h8>Aktualisiere deine Projektangaben</h8>
+                </div>
+                <form action="#" method="POST" role="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% load widget_tweaks %}
+                    <div class="custom-file col-8 mx-auto m-5">
+                        <div class="col_3 input-effect">
+                            <label>Projektname</label>
+                            {{ editform.pro_title|add_class:"effect-16"}}
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+                    <div class="form-group col-8 mx-auto m-5">
+                        <div class="col_3 input-effect">
+                            <label>Beschreibung</label>
+                            {{ editform.pro_desc|add_class:"effect-16"}}
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+                    <div class="custom-file col-8 mx-auto m-5">
+                        <input type="file" name="pro_img"  id="file" class="inputfile">
+                        <label for="file" id="lab"><i class="fas fa-cloud-upload-alt"></i> Titelbild</label>
+                        <div class="invalid-feedback">Bitte wähle eine andere Datei</div>
+                    </div>
+                    <div class="custom-file col-10 mx-auto m-5">
+                        <button type="submit" class="btn btn-outline-primary float-right"><i class="fas fa-edit"></i> Änderungen übernehmen</button>
+                    </div>
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                </form>
+                <a href="#0" class="cd-popup-close img-replace">Close</a>
+            </div> <!-- cd-popup-container -->
+        </div> <!-- Projektwerte anpassen -->
+        <div class="pareto-popup" role="alert">
+            <div class="pareto-popup-container">
+                <div class="container-fluid" id="topline">
+                  <h8>Entdecke den Einfluss der Aufgaben auf dein Projekt</h8>
+                </div>
+                <div class="major">
+                    <b>{{reto}} deiner Aufgaben machen {{par}} des Fortschritts aus!</b>
+                    <div class="container mx-auto">
+                        <div class="row">
+                            <div class="panel panel-primary col-4 mx-auto">
+                                <!--Input für die Charts-->
+                                {% include 'todo/js.html' %}
+                                <canvas id="myChart" height="20rem" width="20rem"></canvas>
+                                <script>
+                                var ctx = document.getElementById("myChart").getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ["Prozentualer Anteil an Aufgaben",],
+                                        datasets: [{
+                                            label: 'Prozentualer Anteil',
+                                            data: [{{perpart}},1-{{perpart}}],
+                                            backgroundColor: [
+                                                'rgba(204,204,204,0.2)',
+                                                'rgba(20, 95, 190, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(204,204,204, 1)',
+                                                'rgba(20, 95, 190, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)',
+                                                'rgba(255, 159, 64, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                });
+                                </script>
+                        </div>
+                            <div class="panel panel-primary col-4 mx-auto">
+                            <!--Input für die Charts-->
+                            {% include 'todo/js.html' %}
+                            <canvas id="myChart2" height="20rem" width="20rem"></canvas>
+                            <script>
+                            var ctx = document.getElementById("myChart2").getContext('2d');
+                            var myChart2 = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                labels: ["Effekt auf den Fortschritt",],
+                                    datasets: [{
+                                           label: 'Prozentualer Anteil',
+                                           data: [{{dopart}},1-{{dopart}}],
+                                        backgroundColor: [
+                                            'rgba(20, 95, 190, 0.2)',
+                                            'rgba(204,204,204,0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(20,95,190,1)',
+                                            'rgba(204, 204, 204, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                            });
+                            </script>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary p-4 rounded col-10 mx-auto dolist">
+                    <ul class="list-group-flush">
+                        {% for do in end_pareto_list%}
+                        {% include 'todo/todo_temp.html'%}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a href="#0" class="pareto-popup-close img-replace">Close</a>
+            </div> <!-- cd-popup-container -->
+        </div> <!-- cd-popup -->
+    </div>
+
+    <div class="fixedbtn">
+        <div class="do_sloth"></div>
+    </div>
+
+{% endblock %}

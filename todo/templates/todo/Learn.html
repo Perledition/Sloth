@@ -1,0 +1,105 @@
+{% extends 'todo/base.html'%}
+
+{% block body %}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'todo/Learn.css' %}" type="text/css"/>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+    <div class="container-fluid mx-auto">
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3>Finde deine Tutorials hier</h3>
+            </div>
+        </div>
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <h5 class="panel-heading p-3 mb-2 text-center text-light rounded learnvidhead"><i class="fas fa-video"></i> Tutorials für dein Zeitmanagement</h5>
+        </div>
+
+        <ul class="nav nav-tabs col-10 mx-auto" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Allgemein</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Dein Zeitmanagement</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                    <div class="row mx-auto p-2 border-bottom">
+                        <div class="container col-lg-5 col-md-12 mx-auto text-center">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/fe3FjePpmqI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div class="container col-lg-5 col-md-12 m-4 mx-auto">
+                           <h4 class="text-left">1. Dashboard und Aufgaben</h4>
+                            <p class="text-left text-secondary">
+                                In diesem Video findest du alle relevanten Informationen zum Thema Dashboard und der Erstellung von Aufgaben.
+                                Unter Anderem lernst du wie das Dashboard aufgebaut ist und wie du verschiedene Zeitbereiche filtern kannst.
+                                Außerdem erklären wir dir wie du Aufgaben richtig erstellst und was du alles in der Detailansicht anstellen und finden kannst.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mx-auto p-2 border-bottom">
+                        <div class="container col-lg-5 col-md-12 m-4 mx-auto">
+                           <h4 class="text-left">2. Projekte</h4>
+                            <p class="text-left text-secondary">
+                                Was es mit den Projekten auf sich hat, wie du sie erstellst und warum du sie benutzen solltest, erfährst du in diesem Tutorial.
+                                Unter anderem lernst du, wie du mit Sloth signifikante Einflussfaktoren innerhalb von Projekten erkennst.
+                            </p>
+                        </div>
+                        <div class="container col-lg-5 col-md-12 mx-auto text-center">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/6eI5ZxKnjCk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="row mx-auto p-2 border-bottom">
+                        <div class="container col-lg-5 col-md-12 mx-auto text-center">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/4kOCAG6jpi0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div class="container col-lg-5 col-md-12 m-4 mx-auto">
+                           <h4 class="text-left">3. Statistik</h4>
+                            <p class="text-left text-secondary">
+                                Die Sloth-Statistik gibt dir Aufschluss über dein Verhalten bezüglich deiner Aufgabenbewältigung und deiner Aktivität. Wie du die Statistik-Page richtig lesen kannst,
+                                welche Anzeigen es gibt und wozu du sie benötigst, findest du in diesem Tutorial heraus. Grundsätzlich ist es immer gut zu wissen, wie die eigene Arbeitweise funktioniert, denn nur
+                                so kann auch eine nachhaltige Verbesserung geschaffen werden.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mx-auto p-2 border-bottom">
+                        <div class="container col-lg-5 col-md-12 m-4 mx-auto">
+                           <h4 class="text-left">4. Account</h4>
+                            <p class="text-left text-secondary">
+                                Mit diesem letzten Tutorial findet die Serie zur Einführung seinen Abschluss. In diesem Tutorial lernst du wie du wie du dir ein
+                                Profilbild einstellst oder deine Accountinformationen anpassen kannst.
+                            </p>
+                        </div>
+                        <div class="container col-lg-5 col-md-12 mx-auto text-center">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/uOapxxJQsEk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                    <div class="container col-4">
+                        <div class="row mx-auto">
+                            <a href="{% url 'hard_dislike' %}" class="text-center ml-4 col likeit"><i class="fas fa-thumbs-down"></i></a>
+                            <a href="{% url 'hard_like' %}" class="text-center ml-4 col likeit"><i class="fas fa-thumbs-up"></i></a>
+                        </div>
+                        <div class="row mx-auto">
+                            <p class="text-secondary text-center col"> {{dislike}}</p>
+                            <p class="text-secondary text-center col"> {{like}}</p>
+                        </div>
+
+                    </div>
+                </div>
+                <h5 class="text-center mx-auto col-6 p-4 m-4">Würdest du hier gerne Tutorials finden, die individuell auf deine Arbeitsweise abgestimmt sind und deine Produktivität ins nächste Level befördern?</h5>
+            </div>
+        </div>
+        <div class="zusatzblock"></div>
+    </div>
+    <div class="fixedbtn">
+        <div class="do_sloth"></div>
+     <!-- <img src="{% static 'todo/images/sloth_icon.png' %}" class="rounded-circle"/>-->
+    </div>
+{% endblock %}

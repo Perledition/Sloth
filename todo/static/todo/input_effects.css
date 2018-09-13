@@ -1,0 +1,61 @@
+/*= Reset CSS 
+============= */
+
+/*= input focus effects css
+=========================== */
+:focus{outline: none;}
+
+.col_3{
+	float: left; 
+	width: 95%; 
+	margin: 3%;
+	color: #929aa7;;
+	position: relative;
+	display: inline-block;
+} /* necessary to give position: relative to parent. */
+
+input[type="text"]{
+	font-family:sans-serif;
+	font-size: 1.5vh;
+	color: var(--middark);
+	width: 100%; 
+	box-sizing: border-box; 
+	letter-spacing: 1px;
+}
+
+.effect-16{
+	border: 0;
+	color: var(--middark);
+	font-size: 1.8vh;
+	padding: 4px 0; 
+	width: 95%;
+	border-bottom: 1px solid var(--lightgrey);
+}
+
+.effect-16 ~ .focus-border{
+	position: absolute; 
+	bottom: 0; 
+	left: 0; 
+	width: 0; 
+	height: 1px;
+	background-color: var(--lightblue); 
+	transition: 0.8s;
+}
+.effect-16:focus ~ .focus-border,
+.has-content.effect-16 ~ .focus-border{
+	width: 100%; 
+	transition: 0.4s;
+}
+
+textarea{
+	width: 95%;
+	resize: none;
+	height: auto;
+	border-bottom: 3px solid var(--lightgrey);
+	
+}
+/*.effect-16 ~ label{position: absolute; left: 0; width: 100%; top: 9px; color: #aaa; transition: 0.3s; z-index: -1; letter-spacing: 0.5px;}
+.effect-16:focus ~ label, .has-content.effect-16 ~ label{top: -16px; font-size: 12px; color: #3399FF; transition: 0.3s;}
+*/
+/*= input focus effects css End
+=============================== */

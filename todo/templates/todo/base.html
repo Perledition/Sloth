@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Sloth</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" href="{%  static 'todo/images/2316sloth_icon_blue.ico' %}"> <!-- musst du dir nochmal in Ruhe ansehen -->
+
+    <link rel="stylesheet" href="{% static 'todo/baseStyle.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/input_effects.css' %}" type="text/css"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="scripts/plugin.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+
+    <!--Script für input effect-->
+    <script>
+    // JavaScript for label effects only
+    $(window).load(function(){
+        $(".col-3 input").val("");
+
+        $(".input-effect input").focusout(function(){
+            if($(this).val() != ""){
+                $(this).addClass("has-content");
+            }else{
+                $(this).removeClass("has-content");
+            }
+        })
+    });
+    </script>
+    <!-- sidebar movement-->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".fixedbtn").click(function(){
+                $(".fixedbtn").toggleClass("active")
+            })
+            $(".fixedbtn").click(function(){
+                $(".sidebar").toggleClass("active")
+            })
+        });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $(".add-btn").click(function(){
+            $(".add-btn").toggleClass("active")
+        })
+        $(".add-btn").click(function(){
+            $(".sidebar").toggleClass("active")
+        })
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $(".add-btn").click(function(){
+            $(".add-btn").toggleClass("active")
+        })
+        $(".add-btn").click(function(){
+            $(".fixedbtn").toggleClass("active")
+        })
+    });
+    </script>
+
+    <!--Popups for items and new task-->
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+	    //open popup
+	       $('.cd-popup-trigger').on('click', function(event){
+		      event.preventDefault();
+		      $('.cd-popup').addClass('is-visible');
+	       });
+
+	       //close popup
+	       $('.cd-popup').on('click', function(event){
+		      if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-popup') ) {
+			      event.preventDefault();
+			      $(this).removeClass('is-visible');
+		      }
+	       });
+	       //close popup when clicking the esc keyboard button
+	       $(document).keyup(function(event){
+    	      if(event.which=='27'){
+    		     $('.cd-popup').removeClass('is-visible');
+	          }
+           });
+        });
+    </script>
+    <!--Popup for Pareto-->
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+	    //open popup
+	       $('.pareto-popup-trigger').on('click', function(event){
+		      event.preventDefault();
+		      $('.pareto-popup').addClass('is-visible');
+	       });
+
+	       //close popup
+	       $('.pareto-popup').on('click', function(event){
+		      if( $(event.target).is('.pareto-popup-close') || $(event.target).is('.pareto-popup') ) {
+			      event.preventDefault();
+			      $(this).removeClass('is-visible');
+		      }
+	       });
+	       //close popup when clicking the esc keyboard button
+	       $(document).keyup(function(event){
+    	      if(event.which=='27'){
+    		     $('.pareto-popup').removeClass('is-visible');
+	          }
+           });
+        });
+    </script>
+    <!--Popup for usermsg-->
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+	    //open popup
+	       $('.cd-usermsg-trigger').on('click', function(event){
+		      event.preventDefault();
+		      $('.cd-usermsg').addClass('is-visible');
+	       });
+
+	       //close popup
+	       $('.cd-usermsg').on('click', function(event){
+		      if( $(event.target).is('.cd-usermsg-close') || $(event.target).is('.cd-usermsg') ) {
+			      event.preventDefault();
+			      $(this).removeClass('is-visible');
+		      }
+	       });
+	       //close popup when clicking the esc keyboard button
+	       $(document).keyup(function(event){
+    	      if(event.which=='27'){
+    		     $('.cd-usermsg').removeClass('is-visible');
+	          }
+           });
+        });
+    </script>
+    <!--Popup edit-->
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+	    //open popup
+	       $('.edit-popup-trigger').on('click', function(event){
+		      event.preventDefault();
+		      $('.edit-popup').addClass('is-visible');
+	       });
+
+	       //close popup
+	       $('.edit-popup').on('click', function(event){
+		      if( $(event.target).is('.edit-popup-close') || $(event.target).is('.edit-popup') ) {
+			      event.preventDefault();
+			      $(this).removeClass('is-visible');
+		      }
+	       });
+	       //close popup when clicking the esc keyboard button
+	       $(document).keyup(function(event){
+    	      if(event.which=='27'){
+    		     $('.edit-popup').removeClass('is-visible');
+	          }
+           });
+        });
+    </script>
+
+
+</head>
+<body>
+<!-- Headline-->
+    <div class="container-fluid text-center">
+        <div class="row Headblock">
+            <svg version="1.1" id="headblockbanner" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 1400 100" style="enable-background:new 0 0 1400 100;" xml:space="preserve">
+            <style type="text/css">
+                .st0{fill:url(#SVGID_1_);}
+            </style>
+            <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="50.8835" x2="1400" y2="50.8835">
+                <stop  offset="0.2769" style="stop-color:#0396F9"/>
+                <stop  offset="1" style="stop-color:#145FBE"/>
+            </linearGradient>
+            <path class="st0" d="M0,39c0,0,355-63,610-19.7s564,129.8,790,50.1V1c0,0-222,54-575,22C687.5,10.6,378-4.3,254.6,1
+                C157.1,5.2,0,25.3,0,25.3V39z"/>
+            </svg>
+            {% if request.user.userprofile.cust_icon is True %}
+            <div class="container col-3 align-middle">
+                <img src="{{request.user.userprofile.icon.url}}" class="float-center align-middle avatar_profile" alt="Hoppala, dieser Fehler ist uns auch etwas peinlich" style="width:80%">
+            </div>
+            {% else %}
+            <div class="container col-3 align-middle">
+                <img src="{% static 'todo/images/sloth_profil.png' %}" class="float-center align-middle avatar_profile" alt="Hoppala, dieser Fehler ist uns auch etwas peinlich" style="width:80%">
+            </div>
+            {% endif %}
+        </div>
+        <div class="container-fluid text-center">
+            <h1>{{request.user.username}}</h1>
+        </div>
+    </div>
+<!-- Sidebar-->
+    <script>
+    // JavaScript for label effects only
+    $(window).load(function(){
+        $(".col-3 input").val("");
+
+        $(".input-effect input").focusout(function(){
+            if($(this).val() != ""){
+                $(this).addClass("has-content");
+            }else{
+                $(this).removeClass("has-content");
+            }
+        })
+    });
+    </script>
+    <div class="sidebar">
+        <div class="container-fluid" id="topline">
+          <h8 id="sb">Neue Aufgabe</h8>
+        </div>
+        <p></p>
+        <form action="{% url 'add'%}" method="POST" role="form">
+            {% csrf_token %}
+            <div class="container-fluid form-group">
+                <div class="input-group">
+                    {{ form.error }}
+                    {% load widget_tweaks %}
+                    <div class="col_3 input-effect">
+                        <p class="text-left">Aufgabe</p>
+                        {{ form.task_title|add_class:"effect-16"}}
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <p class="text-left">Beschreibung</p>
+                        <textarea class="effect-16" name="task_explain"></textarea><br>
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <p class="text-left">Grad der Wichtigkeit</p>
+                        <input type="range" min="0" max="10" class="effect_16" id="myRange" name="task_imp"><br>
+                        <span id="f"></span>
+                    </div>
+                    <script>
+                    var slideCol = document.getElementById("myRange");
+                    var y = document.getElementById("f");
+                    y.innerHTML = slideCol.value;
+
+                    slideCol.oninput = function() {
+                        y.innerHTML = this.value;
+                    }
+
+                    slideSq.oninput = function() {
+                        y.innerHTML = this.value;
+                    }
+
+                    slidePic.oninput = function() {
+                        y.innerHTML = this.value;
+                    }
+                    </script>
+                    <div class="col_3 input-effect">
+                        <p class="text-left">Aufwand in Stunden</p>
+                        <a>Stunde</a>&nbsp;&nbsp;&nbsp;<a>Minuten</a><br>
+                        <t>{{ form.task_eff_hour|add_class:"time" }}<a><b>:</b></a>{{ form.task_eff_minutes|add_class:"time" }}</t><br>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <p class="text-left">Projektzuordnung</p>
+                        <select name="pro_id" class="effect-16">
+                            {% for pro in all_pro %}
+                            {% if pro.pro_complete == False %}
+                            <option class="pro">{{pro}}</option>
+                            {%else%}
+                            {%endif%}
+                            {% endfor %}
+                        </select>
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <p class="text-left">Deadline</p>
+                        <input type="date" name="date" class="effect-16">
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <a>Stunde</a>&nbsp;&nbsp;&nbsp;<a>Minuten</a><br>
+                        {{ form.hour|add_class:"time" }}<b>:</b>{{ form.minutes|add_class:"time" }}<br>
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="sb_section">
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit" class="btn btn-outline-primary btn-block">Los geht's{{pro.id}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<!-- Navbar-->
+    <nav class="navbar  navbar-expand-md navbar-light bg-light mx-auto ml-2 mr-2">
+        <ul class="nav navbar-nav mx-auto" >
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'index' %}"><i class="fas fa-tasks" ></i> DASHBORAD</a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'stats' %}"><i class="fas fa-chart-bar" ></i> STATISTIK</a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'trophy' %}"><i class="fas fa-trophy" ></i> PROJEKTE   </a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'learn' %}"><i class="fas fa-graduation-cap" ></i>LERNEN    </a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'account' %}"><i class="fas fa-id-badge" ></i> ACCOUNT   </a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'logout'%}"><i class="fas fa-power-off" ></i> LOGOUT </a></li>
+        </ul>
+    </nav>
+
+{% block body %}
+{% endblock %}
+
+   <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+<footer class="container-fluid bg-light">
+    <svg id="footerwave" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1430 76.49">
+        <defs><style>.cls-1{fill:#fff;}</style></defs>
+        <path class="cls-1" d="M.5,62.5s361-69,756-12,669-23,669-23v-33H-4.5v67Z" transform="translate(4.5 5.5)"/>
+    </svg>
+    <div class="container-fluid">
+        <div class="row p-2">
+            <!--support -->
+            <div class="container col-lg-4 col-md-12 border-right mx-auto">
+                <p class="text-secondary">Support</p>
+                <p  class="text-secondary">Du hast Fragen oder benötigst Hilfe? Dann schreib einfach unseren Support an!<p>
+                <a href="mailto:support@sloth.de">Deine Anfrage</a>
+                <p  class="text-secondary">Sloth steht noch ganz am Anfang, deshalb sei also bitte nicht enttäuscht, wenn wir dir nicht sofort antworten können</p>
+            </div>
+            <!-- Newsletter -->
+            <form class="container col-lg-4 col-md-12 border-right mx-auto" action="{% url 'contact' %}" method="POST" role="form">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <p class="text-secondary">Newsletter</p>
+                <div class="input-group col-8 col-centered">
+                  <input type="text" class="form-control text-center" placeholder="deine Mail-Adresse" aria-label="deine Mail-Adresse" aria-describedby="button-addon2" name="contact">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary mx-auto" type="submit" id="button-addon2">Los</button>
+                  </div>
+                <p class="text-secondary">Kein Spam. und jederzeit kündbar. Bleib über Updates und Entwicklungen informiert.<br>Dein Feature-Vorschlag ist vielleicht der nächste!</p>
+                </div>
+            </form>
+            <!-- Feedback -->
+            <div class="container col-lg-4 col-md-12 align-bottom mx-auto">
+                <p class="text-secondary">Feedback</p>
+                <p class="text-secondary">Wir gestalten diese Platform für Menschen wie dich!<br>Dein Feedback hilft uns dabei diese Seite mehr an deine Bedürfnisse anzupassen</p>
+                <a href="{% url 'feedback' %}" class="btn btn-secondary">Gib deinen Senf dazu!</a>
+            </div>
+        </div>
+        <div class="row p-2">
+           <ul class="nav justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Über Sloth</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Datenschutz</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Nutzungsbedingungen</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Vollzeit Slothy werden</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</html>

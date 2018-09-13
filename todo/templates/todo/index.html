@@ -1,0 +1,62 @@
+{% extends 'todo/base.html'%}
+
+{% block body %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'todo/styleIndex.css' %}" type="text/css"/>
+    <div class="container mx-auto col-6 w-250 p-4 rounded border-bottom">
+        <h3 class="p-3 mb-2 bg-light text-center"><i class="far fa-compass"></i> Behalte alle deine Aufgaben im Blick. Einfach, priorisiert, zuverlässig</h3>
+    </div>
+    <div class="container-fluid col-10 mx-auto">
+        <div class="d-flex flex-row border-bottom">
+            <div class="panel panel-primary p-4 rounded col-4 mx-auto">
+                <h4 class="panel-heading p-3 mb-2"><i class="fas fa-exclamation"></i><b> Wichtig Und Dringend</b></h4>
+                <form class="panel panel-primary">
+                    <ul class="list-group">
+                        {%for do in wd%}
+                        {% include 'todo/todo_temp.html'%}
+                        {%endfor%}
+                    </ul>
+                </form>
+            </div>
+            <div class="panel panel-primary p-4 rounded col-4 mx-auto">
+                <h4 class="panel-heading p-3 mb-2"><i class="fas fa-rocket"></i><b> Wichtig Aber Nicht Dringend</b></h4>
+                <form class="panel panel-primary">
+                    <ul class="list-group">
+                        {%for do in wnd%}
+                        {% include 'todo/todo_temp.html'%}
+                        {%endfor%}
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="d-flex flex-row">
+            <div class="panel panel-primary p-4 rounded col-4 mx-auto">
+                <h4 class="panel-heading p-3 mb-2"><i class="fas fa-times-circle"></i><b> Nicht Wichtig Aber Dringend</b></h4>
+                <form class="panel panel-primary">
+                    <ul class="list-group">
+                        {%for do in nwd%}
+                        {% include 'todo/todo_temp.html'%}
+                        {%endfor%}
+                    </ul>
+                </form>
+            </div>
+            <div class="panel panel-primary p-4 rounded col-4 mx-auto">
+                <h4 class="panel-heading p-3 mb-2"><i class="fas fa-shield-alt"></i><b> Weder Wichtig Noch Dringend</b></h4>
+                <form class="panel panel-primary">
+                    <ul class="list-group">
+                        {%for do in nwnd%}
+                        {% include 'todo/todo_temp.html'%}
+                        {%endfor%}
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="fixedbtn" alt="Responsive image">
+        <div class="text-center">
+          <img src="{% static 'todo/images/sloth_icon.png' %}" class="img-circle mx-auto" alt="Cinque Terre" width="auto" height="60%"/>
+        </div>
+    </div>
+
+
+{% endblock %}

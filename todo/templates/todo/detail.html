@@ -1,0 +1,283 @@
+{% extends 'todo/base.html'%}
+
+{% block body %}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'todo/styleDetail.css' %}" type="text/css"/>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+    <div class="container-fluid mx-auto">
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3><b>Aufgabe:</b> {{todo.task_title}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto" id="buttons">
+                <a href="{% url 'complete' todo.id %}" class="btn btn-outline-primary"><i class="fas fa-check"></i> Aufgabe abschließen</a>
+                {% if todo.project.pro_title == 'Kein Projekt' %}
+                {% else %}
+                <a href="{% url 'pro' todo.project.id %}" class="btn btn-outline-secondary"><i class="fas fa-trophy"></i> Zum Projekt</a>
+                {% endif %}
+                <a href="{% url 'index'%}" class="btn btn-outline-secondary"><i class="fas fa-tasks"></i> Zurück zum Dashboard</a>
+                <a href="{% url 'delete' todo.id%}" class="float-right delete_btn"><i class="fas fa-trash"></i></a>
+            </div>
+        </div>
+        <!-- Beschreibung und  Paramenter -->
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <h5 class="panel-heading p-3 mb-2 text-center text-light rounded"><i class="fas fa-info"></i> Beschreibungen und Parameter</h5>
+        </div>
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <div class="row">
+                <div class="container col-10">
+                    <div class="row mx-auto">
+                       <!--Input für die Charts-->
+                        {% include 'todo/js.html' %}
+                        <div class="col-lg-3 col-md-12 mr-5 border-right align-middle">
+                            {% include 'todo/js.html' %}
+                            <canvas id="ChartIMP"></canvas>
+                            <div class="donut-inner">
+                                <p class="effort">{{todo.task_imp}}</p>
+                            </div>
+                            <script>
+                            var ctx = document.getElementById("ChartIMP").getContext('2d');
+                            var data = {
+                            datasets: [
+                                {
+                                    data: [{{todo.task_imp}},10-{{todo.task_imp}}],
+                                    backgroundColor: [
+                                        "rgba(10, 128, 226, 1)",
+                                        "rgba(204, 204, 204, 0.5)",
+                                    ],
+                                    hoverBackgroundColor: [
+                                        "rgba(36, 112, 250, 1)",
+                                        "rgba(0, 0, 0, 0)",
+                                    ],
+                                    hoverBorderColor: [,"rgba(0, 0, 0, 0)"]
+                                }]
+                            };
+
+                            var myChart = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: data,
+                                options: {
+                                  legend: {
+                                    display: false
+                                  },
+                                  tooltips: {
+                                    enabled: false
+                                  },
+                                  cutoutPercentage: 80,
+                                }
+                            });
+                            </script>
+                        </div>
+                        <div class="col-lg col-md-12 border-right align-middle">
+                            <div class="text-center" id="effort">{{eff}} Std</div>
+                        </div>
+                        <div class="col-lg col-md-12 ml-5 align-middle">
+                            <!--Input für die Charts-->
+                            {% include 'todo/js.html' %}
+                            <div class="text-center" id="timer"></div>
+                            <script type="text/javascript">
+                            var ReleaseDate = new Date("{{timestamp}}").getTime();
+                            var TimerFunction = setInterval(function(){
+
+                              var DatumHeute = new Date().getTime();
+                              var Differenz = ReleaseDate - DatumHeute;
+
+                              var d = Math.floor(Differenz / (1000*60*60*24));
+                              var h = Math.floor((Differenz % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                              var m = Math.floor((Differenz % (1000 * 60 * 60)) / (1000 * 60));
+                              var s = Math.floor((Differenz % (1000 * 60)) / 1000);
+
+                              document.getElementById('timer').innerHTML = "<span>" + d + "<br><i>Tage</i></span><span>" + h + "<br><i>Stunden</i></span><span>"
+                              + m + "<br><i>Minuten</i></span><span>" + s + "<br><i>Sekunden</i></span>";
+
+                              if(Differenz < 0 ) {
+                                clearInterval(TimerFunction);
+                                document.getElementById('timer').innerHTML = "Abgelaufen";
+                              }
+
+                            }, 1000)
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row mx-auto">
+                       <!--Input für die Charts-->
+                        {% include 'todo/js.html' %}
+                        <div class="col-lg-3 col-md-12 mr-5 border-right">
+                            <p class="text-secondary text-center">Wichtigkeit</p>
+                        </div>
+                        <div class="col-lg col-md-12 border-right">
+                            <p class="text-secondary text-center align-bottom">Aufwand in Stunden</p>
+                        </div>
+                        <div class="col-lg col-md-12 ml-5">
+                            <p class="text-secondary text-center">Verbleibende Zeit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <p class="task_text">{{todo.task_explain}}</p>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-9 mx-auto">
+                <a href="#" class="btn btn-outline-secondary float-right edit-popup-trigger" title="Bearbeiten">
+                    <i class="fas fa-edit"></i> Bearbeiten</a>
+            </div>
+        </div>
+        <!-- Arbeitsbereich -->
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <h5 class="panel-heading p-3 mb-2 text-center text-light rounded"><i class="fas fa-clipboard-list"></i> Arbeitsbereich</h5>
+        </div>
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <div class="row">
+                <div class="container col-lg-6 col-md-12">
+                    <div class="checklistbar">
+                        <i class="fas fa-pencil-alt"></i><b> Checkliste</b><g class="float-right">{{checked}}/{{sum}}</g>
+                    </div>
+                    <div class="holder">
+                        <ul>
+                            {% for item in Items %}
+                            {% if item.checked == False%}
+                            <li class="list-item"><i class="far fa-square"></i>&nbsp<a href="{% url 'checkItem' item.id %}">{{item.Item_title}}</a></li>
+                            {% else %}
+                            <li class="list-item"><i class="fas fa-check-square"></i></i>&nbsp<a class="text-secondary" href="#"><s>{{item.Item_title}}</s></a>
+                                <b class="hide_me">{{todo.id}}</b></li>
+                            {% endif %}
+                            {% endfor%}
+                        </ul>
+                    </div>
+                    <form class="post" action="{% url 'addItem' todo.id%}" method="POST" role="form">
+                        {% csrf_token %}
+                        <div class="input-group mb-3" id="inputGroup-sizing-default">
+                            <input type="text" class="form-control" name="ItemInput" placeholder="Füge deiner Checkliste etwas hinzu" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">Hinzufügen</button><b class="hide_me">{{todo.id}}</b>
+                            </div>
+                        </div>
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                    </form>
+                </div>
+                <div class="container col-lg-6 col-md-12">
+                        <div class="checklistbar">
+                            <i class="fas fa-comment"></i><b> Gedankenblitz</b>
+                        </div>
+                        <div class="holder">
+                            {% for chat_text in chat%}
+                            <div class="media m-2">
+                              <div class="media-left pr-2">
+                                {% if request.user.userprofile.cust_icon is True %}
+                                <img src="{{request.user.userprofile.icon.url}}" class="media-object" style="width:60px">
+                                {% else %}
+                                <img src="{% static 'todo/images/sloth_profil.png' %}" class="media-object" style="width:60px">
+                                {% endif %}
+                              </div>
+                              <div class="media-body border-bottom">
+                                <p class="text-primary text-bold media-heading">{{chat_text.sender}}</p>
+                                <p>{{chat_text.textmsg}}</p>
+                              </div>
+                            </div>
+                            {% endfor%}
+                        </div>
+                        <form class="post" action="{% url 'addmsg' todo.id%}" method="POST" role="form">
+                            {% csrf_token %}
+                            <div class="input-group mb-3" id="inputGroup-sizing-default">
+                                <input type="text" class="form-control" name="msg_text" placeholder="Kommentar eingeben" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit">Hinzufügen</button><b class="hide_me">{{todo.id}}</b>
+                                </div>
+                            </div>
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="user" value="{{request.user}}">
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="edit-popup" role="alert">
+        <div class="edit-popup-container">
+            <div class="container-fluid" id="topline">
+              <h8>Passe deine Aufgabe ganz einfach an</h8>
+            </div>
+            <form method="POST" id="edit-block" role="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.error}}
+                {% load widget_tweaks%}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <div class="container col-10">
+                    <div class="row">
+                        <h6 class="text-secondary text-left">Aufgabentitel</h6>
+                        <div class="col_3 input-effect">
+                            {{form.task_title|add_class:"effect-16"}}<br>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div><!-- Aufgabentitel -->
+                    <div class="row">
+                        <h6 class="text-secondary text-left">Beschreibung</h6>
+                        <div class="col_3 input-effect">
+                            {{form.task_explain|add_class:"effect-16"}}<br>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div><!-- Beschreibung -->
+                    <div class="row">
+                        {% include 'todo/js.html' %}
+                        <div class="row">
+                            <h6 class="text-secondary text-left">Wichtigkeit</h6>
+                        </div>
+                        <div class="row p-2">
+                            <div class="container col-10 p-4 text-center">
+                                <p>{{form.task_imp|attr:"id:mycurrentRange"}}</p>
+                                <span id="displaynumber"></span>
+                                <script>
+                                var slideCol = document.getElementById("mycurrentRange");
+                                var y = document.getElementById("displaynumber");
+                                y.innerHTML = slideCol.value;
+
+                                slideCol.oninput = function() {
+                                    y.innerHTML = this.value;
+                                }
+
+                                slideSq.oninput = function() {
+                                    y.innerHTML = this.value;
+                                }
+
+                                slidePic.oninput = function() {
+                                    y.innerHTML = this.value;
+                                }
+                                </script>
+                            </div>
+                        </div>
+                    </div><!-- range -->
+                    <div class="row">
+                        <div class="container col-6 border-right">
+                            <h6 class="text-secondary text-left">Aufwand in Stunden</h6>
+                            <div class="container col-10">
+                                <p>Aktuell : {{eff}}. Std</p>
+                                <p class="text-secondary">Stunden  Minuten</p>
+                                <p>{{ form.task_eff_hour|add_class:"time" }}<a><b class="text-secondary">:</b></a>{{ form.task_eff_minutes|add_class:"time" }}</p><br>
+                            </div>
+                        </div>
+                        <div class="container col-6">
+                            {% include 'todo/js.html' %}
+                            <h6 class="text-secondary text-left">Deadline</h6>
+                            <div class="container col-8">
+                                <p><t>Aktuell :</t> <f>{{todo.task_dead}}</f></p>
+                                <input type="date" name="date" class="effect-16"><br>
+                                <p class="text-secondary">Stunden  Minuten</p>
+                                <t>{{ form.hour|add_class:"time" }}<a><b>:</b></a>{{ form.minutes|add_class:"time" }}</t><br>
+                            </div>
+                        </div>
+                    </div><!-- times -->
+                </div>
+                <div class="custom-file col-10 mx-auto m-5">
+                    <button type="submit" class="btn btn-outline-primary float-right"><i class="fas fa-edit"></i> Änderungen übernehmen</button>
+                </div>
+                <input type="hidden" name="next" value="{{ request.path }}">
+            </form>
+            <a href="#0" class="edit-popup-close img-replace">Close</a>
+        </div> <!-- cd-popup-container -->
+    </div> <!-- cd-popup -->
+{% endblock %}

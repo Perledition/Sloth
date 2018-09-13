@@ -1,0 +1,89 @@
+#taskname{
+	color: var(--lightgrey);
+	padding: 10px;
+	font-size: 2rem;
+}
+
+#displaynumber{
+	font-size:1.8vh;
+	color: var(--middark);
+	margin: 3vh;
+}
+
+input{
+	margin: 0.5vh;
+}
+
+#l{
+	float: left;
+	color: var(--lightgrey);
+	font-size: 1.5vh;
+	margin: .5vh;
+}
+
+#r{
+	float: center;
+	color: var(--lightgrey);
+	font-size: 1.5vh;
+	margin: .5vh;
+}
+
+.box t{
+	color: var(--lightgrey);
+	font-size: 1.5vh;
+	
+}
+
+.box f{
+	color: var(--middark);
+	font-size: 2vh;
+	
+}
+
+.box-longxl{
+  background: #fff;
+  margin:10px;
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
+  width: 92%;
+  height: auto;
+  font-size:2rem;
+  color: var(--middark);
+  box-shadow: var(--shadow);
+  margin-bottom: 10px;
+  justify-items: center;
+  align-items: center;
+  padding: 10px;
+  display: inline-block;  
+}
+
+#enterbtn{
+  width: 93%;
+  display: inline-block;  
+}
+
+.box-longxl h5{
+	color: var(--lightgrey);
+	padding: 10px;
+	font-size: 2rem;
+}
+
+.list-item .setbtn{
+	float: right;
+	margin:.5vh;
+	color: var(--lightgrey);
+}
+
+.media-body .setbtn{
+	float: right;
+	margin:.5vh;
+	color: var(--lightgrey);
+}
+
+.list-item .setbtn:hover{
+	color: var(--lightblue);
+}
+
+.media-body .setbtn:hover{
+	color: var(--lightblue);
+}

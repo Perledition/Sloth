@@ -1,0 +1,402 @@
+{% extends 'todo/base.html'%}
+
+{% block body %}
+    {% load staticfiles %}
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+<link rel="stylesheet" href="{% static 'todo/styleStats.css' %}" type="text/css"/>
+    <div class="container-fluid mx-auto">
+        <!-- Headline für sektion -->
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3>Anteile offener Aufgaben</h3>
+            </div>
+        </div>
+        <!-- task key values-->
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto border-bottom">
+            <div class="row text-center">
+                <div class="col-lg-3 col-md-12">
+                    <!--Input für die Charts-->
+                    {% include 'todo/js.html' %}
+                    <canvas id="wd"></canvas>
+                    <div class="donut-inner">
+                        <p class="effort">{{per1}}%</p>
+                    </div>
+                    <h5 class="text-center text-secondary">Wichtig und dringend</h5>
+                    <script>
+                    var ctx = document.getElementById("wd").getContext('2d');
+                    var data = {
+                    datasets: [
+                        {
+                            data: [{{per1}},100-{{per1}}],
+                            backgroundColor: [
+                                "rgba(10, 128, 226, 1)",
+                                "rgba(204, 204, 204, 0.5)",
+                            ],
+                            hoverBackgroundColor: [
+                                "rgba(36, 112, 250, 1)",
+                                "rgba(0, 0, 0, 0)",
+                            ],
+                            hoverBorderColor: [,"rgba(0, 0, 0, 0)"]
+                        }]
+                    };
+
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                          legend: {
+                            display: false
+                          },
+                          tooltips: {
+                            enabled: false
+                          },
+                          cutoutPercentage: 80,
+                        }
+                    });
+                    </script>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <!--Input für die Charts-->
+                    {% include 'todo/js.html' %}
+                    <canvas id="wnd"></canvas>
+                    <div class="donut-inner">
+                        <p class="effort">{{per2}}%</p>
+                    </div>
+                    <h5 class="text-center text-secondary">Wichtig aber nicht dringend</h5>
+                    <script>
+                    var ctx = document.getElementById("wnd").getContext('2d');
+                    var data = {
+                    datasets: [
+                        {
+                            data: [{{per2}},100-{{per2}}],
+                            backgroundColor: [
+                                "rgba(10, 128, 226, 1)",
+                                "rgba(204, 204, 204, 0.5)",
+                            ],
+                            hoverBackgroundColor: [
+                                "rgba(36, 112, 250, 1)",
+                                "rgba(0, 0, 0, 0)",
+                            ],
+                            hoverBorderColor: [,"rgba(0, 0, 0, 0)"]
+                        }]
+                    };
+
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                          legend: {
+                            display: false
+                          },
+                          tooltips: {
+                            enabled: false
+                          },
+                          cutoutPercentage: 80,
+                        }
+                    });
+                    </script>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <!--Input für die Charts-->
+                    {% include 'todo/js.html' %}
+                    <canvas id="nwd"></canvas>
+                    <div class="donut-inner">
+                        <p class="effort">{{per3}}%</p>
+                    </div>
+                    <h5 class="text-center text-secondary">Dringend aber nicht Wichtig</h5>
+                    <script>
+                    var ctx = document.getElementById("nwd").getContext('2d');
+                    var data = {
+                    datasets: [
+                        {
+                            data: [{{per3}},100-{{per3}}],
+                            backgroundColor: [
+                                "rgba(10, 128, 226, 1)",
+                                "rgba(204, 204, 204, 0.5)",
+                            ],
+                            hoverBackgroundColor: [
+                                "rgba(36, 112, 250, 1)",
+                                "rgba(0, 0, 0, 0)",
+                            ],
+                            hoverBorderColor: [,"rgba(0, 0, 0, 0)"]
+                        }]
+                    };
+
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                          legend: {
+                            display: false
+                          },
+                          tooltips: {
+                            enabled: false
+                          },
+                          cutoutPercentage: 80,
+                        }
+                    });
+                    </script>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <!--Input für die Charts-->
+                    {% include 'todo/js.html' %}
+                    <canvas id="nwnd"></canvas>
+                    <div class="donut-inner">
+                        <p class="effort">{{per4}}%</p>
+                    </div>
+                    <h5 class="text-center text-secondary">Weder Wichtig noch Dringend</h5>
+                    <script>
+                    var ctx = document.getElementById("nwnd").getContext('2d');
+                    var data = {
+                    datasets: [
+                        {
+                            data: [{{per4}},100-{{per4}}],
+                            backgroundColor: [
+                                "rgba(10, 128, 226, 1)",
+                                "rgba(204, 204, 204, 0.5)",
+                            ],
+                            hoverBackgroundColor: [
+                                "rgba(36, 112, 250, 1)",
+                                "rgba(0, 0, 0, 0)",
+                            ],
+                            hoverBorderColor: [,"rgba(0, 0, 0, 0)"]
+                        }]
+                    };
+
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                        options: {
+                          legend: {
+                            display: false
+                          },
+                          tooltips: {
+                            enabled: false
+                          },
+                          cutoutPercentage: 80,
+                        }
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!-- Filter -->
+        <div class="row m-4">
+                <div class="container col-10">
+                    <div class="float-right">
+                        <form class="input-group" method="post">
+                            {% csrf_token %}
+                            <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="rng">
+                                <option selected value="4">Alle Werte</option>
+                                <option value="1">diese Woche</option>
+                                <option value="2">diesen Monat</option>
+                                <option value="3">dieses Quartal</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">Zeitraum filtern</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!-- Headline für sektion -->
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3>Aktivität</h3>
+            </div>
+        </div>
+        <!-- Time chart-->
+        <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+            <div class="row">
+                <canvas id="lastw" width="15rem"></canvas>
+                <script>
+                    var speedCanvas = document.getElementById("lastw");
+                    speedCanvas.height = 3;
+
+                    Chart.defaults.global.defaultFontFamily = "Lato";
+                    Chart.defaults.global.defaultFontSize = 18;
+
+                    var Data = {
+                      labels: [{% for i in df_times %}'{{ i }}',{% endfor %}],
+                      datasets: [{
+                        label: "Aufgabenabschlüsse",
+                        data: {{ df_values }},
+                        backgroundColor: [
+                            'rgba(20, 95, 190, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(20, 95, 190, 1)',
+                        ],
+                      }]
+                    };
+
+                    var chartOptions = {
+                      legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                          boxWidth: 80,
+                        }
+                      }
+                    };
+
+                    var lineChart = new Chart(lastw, {
+                      type: 'line',
+                      data: Data,
+                      options: chartOptions
+                    });
+                </script>
+            </div>
+        </div>
+        <!-- Headline für sektion -->
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3>Aufgabenabschlüsse</h3>
+            </div>
+        </div>
+        <!-- Table--><!-- Scatter chart-->
+        <div class="container col-lg-10 col-md-4 border-bottom">
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <div class="card m-2 p-2">
+                      <div class="card-body">
+                          <h4 class="card-title text-primary text-center">{{done_perc}}%</h4>
+                          <p class="card-text text-secondary text-center">{{done}}</p>
+                          <p class="card-text text-secondary text-center">Abgeschlossene Aufgaben</p>
+                      </div>
+                    </div>
+                    <div class="card m-2 p-2">
+                      <div class="card-body">
+                          <h4 class="card-title text-primary text-center">{{dl_perc}}%</h4>
+                          <p class="card-text text-secondary text-center">{{dl}}</p>
+                          <p class="card-text text-secondary text-center">Abschlüsse nach Deadline</p>
+                      </div>
+                    </div>
+                    <div class="card m-2 p-2">
+                      <div class="card-body">
+                          <h4 class="card-title text-primary text-center">{{shift_perc}}%</h4>
+                          <p class="card-text text-secondary text-center">{{shift}}</p>
+                          <p class="card-text text-secondary text-center">Verschobene Aufgaben</p>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-4 mx-auto">
+                    <canvas id="bubble-chart" width="200" height="100"></canvas>
+                    <script>
+                            new Chart(document.getElementById("bubble-chart"), {
+                                type: 'scatter',
+                                data: {
+                                  datasets: [
+                                    {
+                                      backgroundColor: "rgba(10, 128, 226, 0.3)",
+                                      borderColor: "rgba(10, 128, 226,1)",
+                                      label: 'abgeschlossene Aufgabe',
+                                      data: [{% for dict in  bubble %}
+                                        {
+                                        x:{{dict.0}},
+                                        y:{{dict.1}}
+                                        },
+                                        {% endfor %}]
+                                    }
+                                  ]
+                                },
+                                options: {
+                                  title: {
+                                    display: true,
+                                    text: ''
+                                  }, scales: {
+                                    yAxes: [{
+                                      scaleLabel: {
+                                        display: true,
+                                        labelString: "Wichtigkeit"
+                                      }
+                                    }],
+                                    xAxes: [{
+                                      scaleLabel: {
+                                        display: true,
+                                        labelString: "- vor der Deadline / null = Deadline / + nach Deadline"
+                                      }
+                                    }]
+                                  }
+                                }
+                            });
+                            </script>
+                </div>
+            </div>
+        </div>
+
+        <!-- Headline für sektion -->
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3>Projektübersicht</h3>
+            </div>
+        </div>
+
+        <!-- bar chart-->
+        <div class="container col-lg-10 col-md-4 border-bottom">
+            <div class="row">
+                <div class="col-lg-8 col-md-4 mx-auto">
+                    <canvas id="bar-chart" width="200" height="100"></canvas>
+                    <script>
+                new Chart(document.getElementById("bar-chart"), {
+                    type: 'bar',
+                    data: {
+                      labels: [{% for i in projekte %}'{{ i }}',{% endfor %}],
+                      datasets: [
+                        {
+                          label: "Verbleibender Aufwand in Std",
+                          backgroundColor: [{% for i in colorlist %}'{{ i }}',{% endfor %}],
+                          data: {{ pro_effort }}
+                        }
+                      ]
+                    },
+                    options: {
+                      legend: { display: false },
+                      title: {
+                        display: true,
+                        text: 'Projekte im verbleibenden Zeitaufwand'
+                      }
+                    }
+                });
+                </script>
+                </div>
+                <div class="col-md-4 mx-auto">
+                    <div class="card m-2 p-2">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary text-center">{{ done_pro }}</h4>
+                            <p class="card-text text-secondary text-center">Abgeschlossene Projekte</p>
+                        </div>
+                    </div>
+                    <div class="card m-2 p-2">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary text-center">{{ pros }}</h4>
+                            <p class="card-text text-secondary text-center">Offene Projekte</p>
+                        </div>
+                    </div>
+                    <div class="card m-2 p-2">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary text-center">{{ pro_ten }}</h4>
+                            <p class="card-text text-secondary text-center">Projekte mit +10 Todos</p>
+                        </div>
+                    </div>
+                    <div class="card m-2 p-2">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary text-center">0</h4>
+                            <p class="card-text text-secondary text-center">Abgebrochene Projekte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fixedbtn">
+        <div class="do_sloth"></div>
+     <!-- <img src="{% static 'todo/images/sloth_icon.png' %}" class="rounded-circle"/>-->
+    </div>
+
+{% endblock %}

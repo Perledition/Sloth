@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+
+
+<head>
+    <title>Welcome to Sloth</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'todo/input_effects.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/baseStyle.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/styleReg.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/styleFeedback.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/input_effects.css' %}" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+        <script type="text/javascript">
+        jQuery(document).ready(function($){
+	    //open popup
+	       $('.using-popup-trigger').on('click', function(event){
+		      event.preventDefault();
+		      $('.using-popup').addClass('is-visible');
+	       });
+
+	       //close popup
+	       $('.using-popup').on('click', function(event){
+		      if( $(event.target).is('.using-popup-close') || $(event.target).is('.using-popup') ) {
+			      event.preventDefault();
+			      $(this).removeClass('is-visible');
+		      }
+	       });
+	       //close popup when clicking the esc keyboard button
+	       $(document).keyup(function(event){
+    	      if(event.which=='27'){
+    		     $('.using-popup').removeClass('is-visible');
+	          }
+           });
+        });
+        </script>
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+
+<body>
+<!--feedback block-->
+    <div class="container-fluid">
+        <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1400 300" style="enable-background:new 0 0 1400 300;" xml:space="preserve">
+            <style type="text/css"> .st0{fill:url(#SVGID_1_);}</style>
+            <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-10.5" y1="60.6717" x2="1516.5" y2="60.6717">
+                    <stop  offset="0" style="stop-color:#0396F9"/>
+                    <stop  offset="1" style="stop-color:#145FBE"/>
+                </linearGradient>
+            <path class="st0" d="M0.5,84.5c0,0,328-93,620-20s623,219,896,3v-55v-72h-1527v142L0.5,84.5z"/>
+        </svg>
+        <h2 class="text-center text-bold">Du bist der Hammer! Danke, dass du uns Feedback gibst!</h2>
+    </div>
+    <div class="row" id="subline">
+        <div class="container col-10 text-center">
+            <p class="text-secondary text-center">Das Feedback ist deine Möglichkeit deine ganz individuellen Ideen in Sloth einzubringen. Wir wollen, dass du dich wohl fühlst und das Sloth dich wirklich voran bringt</p>
+            <p class="text-success text-center">{{msg}}</p>
+        </div>
+    </div>
+    <div class="row p-4">
+        <div class="container col-10 p-4 text-center">
+            <form action="#"  method="POST" role="form">
+                {% csrf_token %}
+                <!-- Radio Button Module -->
+                <h5 class="text-left p-2">Wie ist dein erster Eindruck von Sloth?</h5>
+                <div class="row mx-auto">
+                    <div class="container col-8">
+                        <input type="radio" value=1 name="impression" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=2 name="impression" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=3 name="impression" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=4 name="impression" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=5 name="impression" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=6 name="impression" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=7 name="impression" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=8 name="impression" class="btn btn-outline-primary m-5">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container col-8">
+                        <p class="text-secondary float-left">schlecht</p>
+                        <p class="text-secondary float-right">gut</p>
+                    </div>
+                </div>
+                <h5 class="text-left p-2">Wie wahrscheinlich ist es, dass du Sloth ausprobierst?</h5>
+                <div class="row mx-auto">
+                    <div class="container col-8">
+                        <input type="radio" value=1 name="impact" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=2 name="impact" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=3 name="impact" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=4 name="impact" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=5 name="impact" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=6 name="impact" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=7 name="impact" class="btn btn-outline-primary m-5">
+                        <input type="radio" value=8 name="impact" class="btn btn-outline-primary m-5">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container col-8">
+                        <p class="text-secondary float-left">unwahrscheinlich</p>
+                        <p class="text-secondary float-right">sehr wahrscheinlich</p>
+                    </div>
+                </div>
+                <h5 class="text-left p-2">Was würdest du ändern?</h5>
+                <div class="col_3 input-effect">
+                    <textarea class="effect-16" name="feature"></textarea><br>
+                    <span class="focus-border"></span>
+                </div>
+                <h5 class="text-left p-2">Wie bist du auf uns aufmerksam geworden?</h5>
+                <div class="row mx-auto">
+                    <div class="container-fluid">
+                        <div class="col_3 input-effect">
+                            <select name="how" class="effect-16">
+                                <option class="pro">Test User</option>
+                                <option class="pro">Empfehlung</option>
+                                <option class="pro">Recherche</option>
+                            </select>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary float-right">Absenden</button>
+            </form>
+        </div>
+    </div>
+</body>
+<footer>
+    <svg id="footerwave" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1430 76.49">
+        <defs><style>.cls-1{fill:#fff;}</style></defs>
+        <path class="cls-1" d="M.5,62.5s361-69,756-12,669-23,669-23v-33H-4.5v67Z" transform="translate(4.5 5.5)"/>
+    </svg>
+    <div class="container-fluid m-4 p-4">
+        <div class="row">
+            <!--support -->
+            <div class="container col-4 border-right mx-auto">
+                <p class="text-secondary">Support</p>
+                <p>Du hast Fragen oder benötigst Hilfe? Dann schreib einfach unseren Support an!<p>
+                <a href="mailto:support@sloth.de">Deine Anfrage</a>
+                <p>Sloth steht noch ganz am Anfang, deshalb sei also bitte nicht enttäuscht, wenn wir dir nicht sofort antworten können</p>
+            </div>
+            <div class="container col-4 border-right mx-auto">
+                <p class="text-secondary">Newsletter</p>
+                <div class="input-group col-8 col-centered">
+                  <input type="text" class="form-control text-center" placeholder="deine Mail-Adresse" aria-label="deine Mail-Adresse" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-secondary mx-auto" type="button" id="button-addon2">Los</button>
+                  </div>
+                <p class="text-secondary p-2">Kein Spam. und jederzeit kündbar. Bleib über Updates und Entwicklungen informiert.<br>Dein Feature-Vorschlag ist vielleicht der nächste!</p>
+                </div>
+            </div>
+            <div class="container col-4 align-bottom mx-auto">
+                <p class="text-secondary">Feedback</p>
+                <p class="text-secondary">Wir gestalten diese Platform für Menschen wie dich!<br>Dein Feedback hilft uns dabei diese Seite mehr an deine Bedürfnisse anzupassen</p>
+                <button type="button" class="btn btn-secondary">Gib deinen Senf dazu!</button>
+            </div>
+        </div>
+        <div class="row p-4">
+           <ul class="nav justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Über Sloth</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Datenschutz</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Nutzungsbedingungen</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Vollzeit Slothy werden</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</html>

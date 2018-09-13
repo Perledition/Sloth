@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+        {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'todo/styleLogin_landing.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/styleLanding_popups.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/input_effects.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'todo/baseStyle.css' %}" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{%  static 'todo/images/2316sloth_icon_blue.ico' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <title>Welcome to Sloth</title>
+
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"/>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="scripts/plugin.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <!--Popup Login-->
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+	    //open popup
+	       $('.Login-popup-trigger').on('click', function(event){
+		      event.preventDefault();
+		      $('.Login-popup').addClass('is-visible');
+	       });
+
+	       //close popup
+	       $('.Login-popup').on('click', function(event){
+		      if( $(event.target).is('.Login-popup-close') || $(event.target).is('.Login-popup') ) {
+			      event.preventDefault();
+			      $(this).removeClass('is-visible');
+		      }
+	       });
+	       //close popup when clicking the esc keyboard button
+	       $(document).keyup(function(event){
+    	      if(event.which=='27'){
+    		     $('.Login-popup').removeClass('is-visible');
+	          }
+           });
+        });
+    </script>
+
+</head>
+    <!-- Du findest Sloth cool und aber glaubst dieser Code könnte deine Fähigkeiten gebrauchen? Perfekt! Wir benötigen an vielen
+         Stellen noch helfende Hände und würden uns freuen, wenn du dich bei uns meldest -->
+
+    <body>
+    <!-- Headline -->
+        <div class="container col-10 p-5">
+            <img src="{% static 'todo/images/sloth_icon_blue.png' %}" class="img-fluid" alt="Responsive image">
+            <a href="#" class="btn btn-outline-primary mx-auto Login-popup-trigger" id=""><t>Login</t></a>
+        </div>
+        <div class="container col-10 p-5 text-center">
+            <h1 class="font-weight-bold text-center font-weight-bold">MACH WAS DICH WIRKLICH VORAN BRINGT!</h1>
+            <p class="font-weight-normal text-secondary text-center p-4 sub_small">Organisiere mit Sloth deine Aufgaben und verbessere dein Zeitmanagement</p>
+            <a href="{% url 'register' %}" class="btn btn-primary mx-atuo">Starte jetzt!</a>
+        </div>
+    <!-- Wellen Design Screenshot -->
+        <section class="container-fluid text-center align-bottom" id="wave">
+            <svg id="curve1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 254">
+                <path class="cls-2" d="M1400,88.82s-263.81,258.25-715.49,44.53c-5.7-2.7-363.74-235.35-684.51,70L1,300H1400Z" transform="translate(0 -46)"/>
+            </svg>
+            <svg id="curve2" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1401 199.66">
+                <defs><style>.cls-1{fill:url(#Unbenannter_Verlauf_13);}</style><linearGradient id="Unbenannter_Verlauf_13" x1="-0.5" y1="199.67" x2="1400.5" y2="199.67" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#0396f9"/><stop offset="1" stop-color="#145fbe"/></linearGradient></defs>
+                <path class="cls-1" d="M-.5,133.5s264,203,716,35c5.7-2.12,364-185,685,55l-1,76H-.5Z" transform="translate(0.5 -99.84)"/>
+            </svg>
+            <svg id="curve3" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1415 72.91">
+                <path class="cls-1" d="M1407,53.38V108H-8V82.36S223.69-6.06,765.2,59C1164.43,106.89,1407,53.38,1407,53.38Z" transform="translate(8 -35.09)"/>
+            </svg>
+        </section>
+    <!-- Infobox 1 -->
+        <div class="container-fluid p-5 text-center" id="box1">
+            <h2 class="font-weight-bold text-center">Tracke dein Verhalten und verbessere dich stetig</h2>
+            <div class="row m-5 align-baseline text-center">
+                <div class="container col">
+                    <img src="{% static 'todo/images/stats.png' %}" class="align-baseline float-left" alt="Responsive image" id="stats">
+                </div>
+                <div class="container col align-baseline">
+                    <div class="row m-4">
+                        <img class="container col-2 list_icon" src="{% static 'todo/images/icons/001-graph-1.png' %}" alt="Responsive image">
+                        <div class="container col-10 text-left align-baseline">
+                            <h5 class="font-weight-bold">Projektbasiertes arbeiten</h5>
+                            <p class="font-weight-normal text-secondary sub_description">Leg Projekte an und sortiere deine Vorhaben, um jederzeit den vollen Überblick zu behalten und jeden Fortschritt für deine Ziele zu messen</p>
+                        </div>
+                    </div>
+                    <div class="row m-4">
+                        <img class="container col-2 list_icon" src="{% static 'todo/images/icons/002-business-and-finance.png' %}" alt="Responsive image">
+                        <div class="container col-10 text-left align-baseline">
+                            <h5 class="font-weight-bold">Priorisierung nach Wichtigkeit und Dringlichkeit</h5>
+                            <p class="font-weight-normal text-secondary sub_description">Setze deine Priorität richtig und du weist immer, was gerade zu tun ist. Sloth hilft dir dabei</p>
+                        </div>
+                    </div>
+                    <div class="row m-4">
+                        <img class="container col-2 list_icon" src="{% static 'todo/images/icons/005-graph.png' %}" alt="Responsive image">
+                        <div class="container col-10 text-left align-baseline">
+                            <h5 class="font-weight-bold">Auswertung deiner Arbeitsweise</h5>
+                            <p class="font-weight-normal text-secondary sub_description">Tracke dein Arbeitsverhalten, und lerne dich selbst und deine Verhaltensweisen kennen</p>
+                        </div>
+                    </div>
+                    <div class="row m-4">
+                        <img class="container col-2 list_icon" src="{% static 'todo/images/icons/004-graph-2.png' %}" alt="Responsive image">
+                        <div class="container col-10 text-left align-baseline">
+                            <h5 class="font-weight-bold">Optimierung des Zeitmanagement</h5>
+                            <p class="font-weight-normal text-secondary sub_description">Erkenne deine Stärken und Schwächen im Zeitmanagement, werte dein Verhalten aus und werde zum Zeitmanagement Profi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Infobox 2 -->
+        <div class="container-fluid text-center" id="box2">
+            <div class="row m-5 text-center">
+                <div class="container col border-right border-light">
+                    <h2 class="text-white">Dein Feedback zählt</h2>
+                    <p class="text-white">Wir gestalten diese Platform für Menschen wie dich!<br>Dein Feedback hilft uns dabei diese Seite mehr an deine Bedürfnisse anzupassen</p>
+                    <a href="{% url 'first_feedback'%}" class="btn btn-outline-light">Gib deinen Senf dazu!</a>
+                </div>
+                <div class="container col">
+                    <h2 class="text-white">Sloth. Newsletter</h2>
+                    <p class="text-white">Kein Spam. und jederzeit kündbar. Bleib über Updates und Entwicklungen informiert.<br>Dein Feature-Vorschlag ist vielleicht der nächste!</p>
+                    <form action="{% url 'contact' %}" method="POST" role="form">
+                        <div class="input-group col-5 col-centered">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="email" class="form-control text-center" placeholder="deine Mail-Adresse" aria-label="deine Mail-Adresse" aria-describedby="button-addon2" name="contact">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light mx-auto" type="submit" id="button-addon2">Los</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!-- Infobox 3 -->
+        <div class="container-fluid p-5 text-center" id="box3">
+            <div class="row m-5 text-center">
+                <div class="container col">
+                    <div class="row m-4 text-center">
+                        <div class="container col-8 text-center" id="tb3">
+                            <h2 class="font-weight-bold text-center">Sloth ist viel mehr als nur eine Todo-Liste</h2>
+                            <p class="font-weight-normal text-secondary text-center p-4 sub_small">
+                                Gestalte deine Aufgaben anpassbar, arbeite mit Checklisten, Kommentaren und anderen Features um jederzeit
+                                auf dem aktuellen Stand zu sein
+                            </p>
+                            <a href="{% url 'register' %}" class="btn btn-primary mx-atuo">Werde jetzt Aktiv!</a>
+                            <p class="font-weight-normal text-secondary text-center p-4 sub_small">
+                                Wenn du deinem Arbeitsweisen einen Boost geben möchtest und ein Tool suchst, dass dir dabei hilft,
+                                dann ist Sloth genau das richtige für dich. Mit Sloth kannst du nicht nur deine Aufgaben organisieren sondern
+                                ganz nebenbei dein Verhalten optimeren und lernen, wie du in weniger Zeit mehr schaffen kannst. Ganz Individuell
+                                auf dich zugeschnitten!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="container col-4">
+                    <img src="{% static 'todo/images/Featurepic.png' %}" class="align-baseline float-left" alt="Responsive image" id="create_feat">
+                </div>
+            </div>
+        </div>
+    <!-- Infobox 4 -->
+        <div class="container-fluid p-5 text-center" id="box4">
+            <h2 class="font-weight-bold text-center">Sei Teil der Sloth-family</h2>
+            <div class="row p-2 m-2">
+                <div class="container col-10 p-5 text-center">
+                <p class="font-weight-normal text-secondary text-center p-4 sub_small">Teile deine Meinung und Ideen mit uns. Wir wollen, dass Sloth den Menschen mit ihren Aufgaben<br>
+                und ihrem Zeitmanagement wirklich weiter helfen kann. Dafür sind wir auf dein Feedback angewiesen.
+                Dein Einsatz motiviert uns weiter zu machen und besser zu werden!</p>
+                <h2>Feedback abgeben und Vorteile genießen</h2>
+                <p class="font-weight-normal text-secondary text-center p-4 sub_small">Familienmitglieder haben als erstes Zugriff auf neue Sloth-Inhalte, Features und Ideen. Alles was du tun musst,
+                ist dein Feedback abzugeben,<br>dass dich nicht mal 5 Minuten deiner Zeit kostet. Klick einfach auf den Button</p>
+                    <button type="button" class="btn btn-outline-primary mx-atuo">Familienmitglied werden</button>
+                </div>
+            </div>
+        </div>
+    <!-- Infobox 5 -->
+        <div class="container col-10 p-5 text-center" id="box5">
+            <div class="row">
+                <div class="container col">
+                    <img src="{% static 'todo/images/symbol_big.png' %}" class="img-si" alt="Responsive image">
+                </div>
+                <div class="container col align-baseline">
+                    <h2 class="font-weight-bold text-center">Sloth ist für deinen Erfolg da!</h2>
+                    <p class="font-weight-normal text-secondary text-center p-4 sub_small">Beginne jetzt, mit einer einfachen, strukturierten und erfolgsorientierten Arbeitsweise</p>
+                    <a href="{% url 'register' %}" class="btn btn-primary mx-atuo">Werde zum Slothy!</a>
+                    <p class="font-weight-normal text-secondary text-center p-4 sub_small">
+                        Sloth ist großartig einfach, kostenlos und für jeden zugänglich. Solltest du Sloth widererwartet nicht mögen oder nicht nutzen, dann kannst du deinen
+                        Account und deine Daten jederzeit vollständig löschen!
+                    </p>
+                </div>
+            </div>
+        </div>
+    <!-- Popup Login -->
+        <div class="panel panel-primary p-4 rounded col-6 mx-auto">
+            <div class="Login-popup" role="alert">
+                <div class="Login-popup-container">
+                    <div class="container-fluid" id="topline">
+                      <h8>Willkommen zurück!</h8>
+                    </div>
+                    <div class="major">
+                        <div class="row m-3">
+                            {% load widget_tweaks %}
+                            <form class="text-center" role="form" action="#" method="post" enctype="multipart/form-data">
+                                <h4 class="p-4">Log dich ein<br>entdecke dein Potenzial</h4>
+                                {% csrf_token %}
+                                {{form.error}}
+                                <e class="msg">{{error_message}}</e>
+                                <div class="col_3 input-effect">
+                                    <tit>Username</tit>
+                                    {{ form.username|add_class:"effect-16"}}
+                                    <span class="focus-border"></span>
+                                </div>
+                                <div class="col_3 input-effect">
+                                    <tit>Password</tit>
+                                    {{ form.password|add_class:"effect-16"}}
+                                    <span class="focus-border"></span>
+                                </div>
+                                <div class="container col-6">
+                                    <button type="submit" action="{% url 'login' %}" class="btn btn-outline-primary btn-block">Login</button>
+                                </div>
+                                <div class="container col-10 mx-auto" id="linkbox">
+                                    <a href="{% url 'register' %}" class="links">Neu hier? Dann registier dich hier!</a><br>
+                                    <a href="#" class="links">Passwort vergessen?</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <a href="#0" class="Login-popup-close img-replace">Close</a>
+                </div> <!-- Login-popup-container -->
+            </div> <!-- Login-popup -->
+        </div>
+        <div class="container-fluid">
+            <section id="sec_box5">
+                <svg id="curve_footer" data-name="curve_footer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1413 95.98">
+                    <path class="cls-1" d="M-4.5,50.5s380,89,646,18c116.41-31.07,521-129,759,32l8,6H-4.5Z" transform="translate(4.5 -10.52)"/>
+                </svg>
+            </section>
+        </div>
+    </body>
+    <footer>
+        <div class="container-fluid m-4 p-4">
+            <div class="row">
+                <!--support -->
+                <div class="container col-4 border-right mx-auto">
+                    <p class="text-secondary">Support</p>
+                    <p>Du hast Fragen oder benötigst Hilfe? Dann schreib einfach unseren Support an!<p>
+                    <a href="mailto:support@sloth.de">Deine Anfrage</a>
+                    <p>Sloth steht noch ganz am Anfang, deshalb sei also bitte nicht enttäuscht, wenn wir dir nicht sofort antworten können</p>
+                </div>
+                <div class="container col-4 border-right mx-auto">
+                    <p class="text-secondary">Newsletter</p>
+                    <form class="post" action="{% url 'contact' %}" method="POST" role="form">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <div class="input-group col-8 col-centered">
+                          <input type="text" class="form-control text-center" placeholder="deine Mail-Adresse" aria-label="deine Mail-Adresse" aria-describedby="button-addon2" name="contact">
+                          <div class="input-group-append">
+                            <button class="btn btn-secondary mx-auto" type="submit" id="button-addon2">Los</button>
+                          </div>
+                       </div>
+                    </form>
+                    <p class="text-secondary">Kein Spam. und jederzeit kündbar. Bleib über Updates und Entwicklungen informiert.<br>Dein Feature-Vorschlag ist vielleicht der nächste!</p>
+                </div>
+                <div class="container col-4 align-bottom mx-auto">
+                    <p class="text-secondary">Feedback</p>
+                    <p class="text-secondary">Wir gestalten diese Platform für Menschen wie dich!<br>Dein Feedback hilft uns dabei diese Seite mehr an deine Bedürfnisse anzupassen</p>
+                    <button type="button" class="btn btn-secondary">Gib deinen Senf dazu!</button>
+                </div>
+            </div>
+            <div class="row p-4">
+               <ul class="nav justify-content-center">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Über Sloth</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Datenschutz</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Nutzungsbedingungen</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Vollzeit Slothy werden</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</html>

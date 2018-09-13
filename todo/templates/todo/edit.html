@@ -1,0 +1,89 @@
+{% extends 'todo/base.html'%}
+
+{% block body %}
+    {% load staticfiles %}
+    {% load widget_tweaks%}
+
+<link rel="stylesheet" href="{% static 'todo/styleDetail.css' %}" type="text/css"/>
+<link rel="stylesheet" href="{% static 'todo/styleEdit.css' %}" type="text/css"/>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+    <div class="container mx-auto col-6 w-250 p-4 rounded border-bottom">
+        <h3 class="p-3 mb-2 text-light text-center"><i class="far fa-compass"></i> Passe deine Aufgabe an, um immer einen aktuellen Stand zu haben</h3>
+    </div>
+    <div class="container-fluid mx-auto">
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-8 mx-auto" id="buttons">
+                <a href="{% url 'detail' todo.id %}" class="btn_action" ><i class="fas fa-reply"></i> Zurück zur Aufgabe</a>
+                <a href="{% url 'pro' todo.project.id %}" class="btn_action"><i class="fas fa-trophy"></i> Zum Projekt</a>
+                <a href="{% url 'index'%}" class="btn_action"><i class="fas fa-tasks"></i> Zurück zum Dashboard</a>
+                <a href="{% url 'delete' todo.id%}" class="edit_btn"><i class="fas fa-trash fa-2x"></i></a>
+            </div>
+        </div>
+        <form action="{% url 'update' todo.id%}" method="POST" role="form" value="{{todo.id}}">
+
+            <div class="panel panel-primary p-4 rounded col-8 mx-auto">
+                <div class="row">
+                    <div class="box-longxl">
+                        <h5>Aufgabe</h5>
+                        <div class="col_3 input-effect">
+                            {{form.task_title|add_class:"effect-16"}}<br>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+                    <div class="box-longxl">
+                        <h5>Beschreibung</h5>
+                        <div class="col_3 input-effect">
+                            {{form.task_explain|add_class:"effect-16"}}<br>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <b> Änderungen Übernehmen</b><b class="hide_me">{{todo.id}}</b></button>
+            </div>
+            <div class="panel panel-primary p-4 rounded col-8 mx-auto">
+                <div class="row">
+                    <div class="halfsizebox">
+                        <div class="checklistbar">
+                            <i class="fas fa-pencil-alt"></i><b> Checkliste</b>
+                        </div>
+                        <div class="holder">
+                            <ul>
+                                {% for item in todo.checklistitem_set.all %}
+                                {% if item.checked == False%}
+                                <li class="list-item"><i class="far fa-minus-square"></i></i>&nbsp<t>{{item.Item_title}}</t>
+                                <a class="setbtn" href="{% url 'deleteItem' item.pk %}" data-toggle="tooltip" data-placement="top"  title="Löschen">
+                                    <i class="fas fa-trash"></i></a></li>
+                                {% else %}
+                                {% endif %}
+                                {% endfor%}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="halfsizebox">
+                            <div class="checklistbar">
+                                <i class="fas fa-comment"></i><b> Statusmeldungen</b>
+                            </div>
+                            <div class="holder">
+                                {% for chat_text in todo.usermsg_set.all%}
+                                <div class="media m-2">
+                                  <div class="media-left pr-2">
+                                    <img src="#" class="media-object" style="width:60px">
+                                  </div>
+                                  <div class="media-body">
+                                    <h4 class="media-heading">{{chat_text.sender}}</h4>
+                                    <p>{{chat_text.textmsg}}</p>
+                                    <a class="setbtn" href="{% url 'deletemsg' chat_text.pk %}" data-toggle="tooltip" data-placement="top"  title="Löschen">
+                                    <i class="fas fa-trash"></i></a></li>
+                                  </div>
+                                </div>
+                                {% endfor%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+{% endblock %}

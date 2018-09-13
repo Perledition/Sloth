@@ -1,0 +1,22 @@
+.donut-inner{
+	position:absolute;
+	float: center;
+	top: 32%;
+	left: 45%;
+	font-size: 3vh;
+	color: var(--lightgrey);
+	display: inline-block;
+}
+.box{
+  position: relative;
+  margin-left: 3.8rem;
+}
+
+box_pro{
+    font-size: 2vh;
+}
+
+#thead{
+    background: linear-gradient(-90deg, var(--lightblue), var(--darkblue));
+    color: #fff;
+}

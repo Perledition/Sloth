@@ -1,0 +1,88 @@
+{% extends 'todo/base.html'%}
+
+{% block body %}
+    {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'todo/styleAccount.css' %}" type="text/css"/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="panel panel-primary p-4 rounded col-10 mx-auto">
+                <h3>Dein Account</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container col-10 mx-auto">
+        {% load widget_tweaks %}
+        <p><a class="msg">{{msg}}</a></p>
+        <form class="reginput" role="form" action="#" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="container col-10 mx-auto">
+                    <h5 class="panel-heading p-3 mb-2 text-center text-light rounded"><i class="fas fa-user-check"></i> Allgemeine Account Daten</h5>
+                </div>
+                <div class="container col-10 mx-auto">
+                    <div class="col_3 input-effect">
+                        <h>Vorname</h>
+                        {{ form.first_name|add_class:"effect-16"}}
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <h>Nachname</h>
+                        {{ form.last_name|add_class:"effect-16"}}
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <h>Username</h>
+                        {{ form.username|add_class:"effect-16"}}
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="col_3 input-effect">
+                        <h>E-Mail Adresse</h>
+                        {{ form.email|add_class:"effect-16"}}
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+                <div class="container col-10 m-5 mx-auto">
+                    <button type="submit" class="btn btn-outline-primary float-right">Alle Änderungen übernehmen</button>
+                </div>
+            </div>
+            <div class="row">
+               <div class="container col-10 mx-auto">
+                    <h5 class="panel-heading p-3 mb-2 text-center text-light rounded"><i class="fas fa-user-astronaut"></i> Profilbild</h5>
+                </div>
+                <div class="col-md-8 mb-6 m-5 mx-auto">
+                    <p class="text-secondary text-left">Passe dein Profilbild an</p>
+                    <input type="file" name="acc_pic_file"  id="file">
+                    <div class="invalid-feedback">Bitte wähle eine andere Datei</div>
+                </div>
+                <div class="container col-10 m-5 mx-auto">
+                    <button type="submit" class="btn btn-outline-primary float-right">Alle Änderungen übernehmen</button>
+                </div>
+            </div>
+        </form>
+        <p> </p>
+        <div class="row">
+            <div class="container col-10 mx-auto">
+                <h5 class="panel-heading p-3 mb-2 text-center text-light rounded"><i class="fas fa-user-shield"></i> Passwort- und Accountoptionen</h5>
+            </div>
+            <div class="container col-10 mx-auto">
+                <p class="text-secondary p-5">Passwort neu setzen</p>
+                <div class="container-fluid">
+                    <a href="{% url 'change_password' %}" class="btn btn-outline-primary float-right">Passwort verändern</a>
+                </div>
+            </div>
+            <div class="container col-10 mx-auto">
+                <p class="text-secondary p-5">Account löschen</p>
+                <form class="reginput" role="form" action="{% url 'account_delete' %}" method="post">
+                    {% csrf_token %}
+                    <div class="col_3 input-effect">
+                        <input class="effect-16" id="inputPassword" type="password" name="password" placeholder="Bestätige den Löschvorgang mit deinem Passwort">
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="container-fluid">
+                        <button type="submit" class="btn btn-outline-primary float-right">Account löschen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
