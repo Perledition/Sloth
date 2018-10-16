@@ -124,7 +124,10 @@ def addTodo(request):
     #Sidebarfunktion
     form = TodoForm(request.POST)
     if request.method == 'POST':
-        dead = request.POST['date']
+        if request.POST['date'] is None:
+            dead = date.today()
+        else:
+            dead = request.POST['date']
         time = dead.split('-')
 
         eff = float(request.POST['task_eff_hour'])+(int(request.POST['task_eff_minutes'])/60)
@@ -909,6 +912,13 @@ class Registration(View):
     class_form = RegistrationForm
     class_sub_form = UserAgree
 
+    def validate_username(self, username):
+        try:
+            username = User.objects.get(username=username)
+            return 'Der Username %s ist leider schon vergeben...' % username
+        except:
+            return None
+
     def get(self, request):
         form = self.class_form
         sub_form = self.class_form
@@ -918,46 +928,50 @@ class Registration(View):
         form = self.class_form(request.POST)
         sub_form = self.class_form
         username = request.POST['username']
-        password = request.POST['password1']
-        accpet = request.POST['agree']
-        accpet2 = request.POST['agree2']
-        if accpet == 'True':
-            if accpet2 == 'True':
-                if form.is_valid():
-                    form.save()
-                    user = authenticate(username=username, password=password)
-                    if user is not None:
-                        if user.is_active:
-                            login(request, user)
-                            profile = UserProfile.objects.get(user=request.user)
-                            profile.agree = True
-                            profile.agree2 = True
-                            profile.country = request.POST['country']
-                            profile.age = request.POST['birthday']
-                            profile.save()
-                            trophy = Project(pro_title="Kein Projekt", user=request.user)
-                            trophy.save()
-                            trophy.task_set.create(
-                                task_title='Klicke auf "Lernen"',
-                                task_imp=10,
-                                task_explain='Herzlich Willkommen bei Sloth! Um alles notwendige über Sloth zu lernen schaue in dem Reiter "Lernen" nach, wie du am besten mit Sloth arbeiten kannst.',
-                                task_dead=datetime.now(),
-                                task_eff=0.25,
-                                user=request.user)
+        msgUsername = self.validate_username(username)
+        if msgUsername is None:
+            password = request.POST['password1']
+            accpet = request.POST['agree']
+            accpet2 = request.POST['agree2']
+            if accpet == 'True':
+                if accpet2 == 'True':
+                    if form.is_valid():
+                        form.save()
+                        user = authenticate(username=username, password=password)
+                        if user is not None:
+                            if user.is_active:
+                                login(request, user)
+                                profile = UserProfile.objects.get(user=request.user)
+                                profile.agree = True
+                                profile.agree2 = True
+                                profile.country = request.POST['country']
+                                profile.age = request.POST['birthday']
+                                profile.save()
+                                trophy = Project(pro_title="Kein Projekt", user=request.user)
+                                trophy.save()
+                                trophy.task_set.create(
+                                    task_title='Klicke auf "Lernen"',
+                                    task_imp=10,
+                                    task_explain='Herzlich Willkommen bei Sloth! Um alles notwendige über Sloth zu lernen schaue in dem Reiter "Lernen" nach, wie du am besten mit Sloth arbeiten kannst.',
+                                    task_dead=datetime.now(),
+                                    task_eff=0.25,
+                                    user=request.user)
 
-                            return redirect('index')
+                                return redirect('index')
+                        else:
+                            return render(request, self.template_name, {'form': form})
                     else:
-                        return render(request, self.template_name, {'form': form})
+                        msg = 'Hoppala, da hat etwas nicht gepasst. Versuche es nochmal'
+                        return render(request, self.template_name, {'form': form, 'msg': msg, 'sub_form': sub_form})
                 else:
-                    msg = 'Hoppala, da hat etwas nicht gepasst. Versuche es nochmal'
+                    msg = 'Bitte akzeptiere die Datenschutzbedingungen'
                     return render(request, self.template_name, {'form': form, 'msg': msg, 'sub_form': sub_form})
             else:
-                msg = 'Bitte akzeptiere die Datenschutzbedingungen'
+                msg = 'Bitte akzeptiere die Nutzungsbedingungen'
                 return render(request, self.template_name, {'form': form, 'msg': msg, 'sub_form': sub_form})
         else:
-            msg = 'Bitte akzeptiere die Nutzungsbedingungen'
+            msg = msgUsername
             return render(request, self.template_name, {'form': form, 'msg': msg, 'sub_form': sub_form})
-
 
 # User login
 class LoginUser(View):

@@ -25,7 +25,8 @@ SECRET_KEY = '=0&*udn(mnjo8uhfn@_rpcm0!$^dof9l*hu!yqa0^%np@@$d7e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['www.sloth-it.de']
 
 
 # Application definition
@@ -129,7 +130,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = '/home/Perledition/Sloth/static'
+MEDIA_ROOT = '/home/Perledition/Sloth/media'
 MEDIA_URL = '/media/'
 
 

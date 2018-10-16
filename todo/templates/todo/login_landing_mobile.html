@@ -73,17 +73,6 @@
             <!-- Wellen Design Screenshot -->
         <section class="container-fluid text-center align-bottom banner" id="wave">
                <img src="{% static 'todo/images/headpic.png' %}" class="img-fluid" alt="Responsive image">
-            <!--<svg id="curve1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 254">
-                <path class="cls-2" d="M1400,88.82s-263.81,258.25-715.49,44.53c-5.7-2.7-363.74-235.35-684.51,70L1,300H1400Z" transform="translate(0 -46)"/>
-            </svg>
-            <svg id="curve2" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1401 199.66">
-                <defs><style>.cls-1{fill:url(#Unbenannter_Verlauf_13);}</style><linearGradient id="Unbenannter_Verlauf_13" x1="-0.5" y1="199.67" x2="1400.5" y2="199.67" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#0396f9"/><stop offset="1" stop-color="#145fbe"/></linearGradient></defs>
-                <path class="cls-1" d="M-.5,133.5s264,203,716,35c5.7-2.12,364-185,685,55l-1,76H-.5Z" transform="translate(0.5 -99.84)"/>
-            </svg>
-            <svg id="curve3" data-name="Ebene 4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1415 72.91">
-                <path class="cls-1" d="M1407,53.38V108H-8V82.36S223.69-6.06,765.2,59C1164.43,106.89,1407,53.38,1407,53.38Z" transform="translate(8 -35.09)"/>
-            </svg>-->
         </section>
         </div>
     <!-- Infobox 1 -->
@@ -96,28 +85,36 @@
                 <div class="container col align-baseline">
 
                     <div class="row m-4">
-                        <img class="container col-lg-2 col-md-4 list_icon" src="{% static 'todo/images/icons/001-graph-1.png' %}" alt="Responsive image">
+                        <div class="container col-lg-2 col-md-4 icon">
+                            <i class="fas fa-project-diagram fa-3x"></i>
+                        </div>
                         <div class="container col-lg-10 col-md-4 text-left align-baseline">
                             <h5 class="font-weight-bold">Projektbasiertes arbeiten</h5>
                             <p class="font-weight-normal text-secondary sub_description">Leg Projekte an und sortiere deine Vorhaben, um jederzeit den vollen Überblick zu behalten und jeden Fortschritt für deine Ziele zu messen</p>
                         </div>
                     </div>
                     <div class="row m-4">
-                        <img class="container col-lg-2 col-md-4 list_icon" src="{% static 'todo/images/icons/002-business-and-finance.png' %}" alt="Responsive image">
+                        <div class="container col-lg-2 col-md-4 icon">
+                            <i class="fas fa-braille fa-3x"></i>
+                        </div>
                         <div class="container col-lg-10 col-md-4 text-lg-left text-md-block align-baseline">
                             <h5 class="font-weight-bold">Priorisierung nach Wichtigkeit und Dringlichkeit</h5>
                             <p class="font-weight-normal text-secondary sub_description">Setze deine Priorität richtig und du weist immer, was gerade zu tun ist. Sloth hilft dir dabei</p>
                         </div>
                     </div>
                     <div class="row m-4">
-                        <img class="container col-lg-2 col-md-4 list_icon" src="{% static 'todo/images/icons/005-graph.png' %}" alt="Responsive image">
+                        <div class="container col-lg-2 col-md-4 icon">
+                            <i class="fas fa-chart-pie fa-3x"></i>
+                        </div>
                         <div class="container col-lg-10 col-md-4 text-lg-left text-md-block align-baseline">
                             <h5 class="font-weight-bold">Auswertung deiner Arbeitsweise</h5>
                             <p class="font-weight-normal text-secondary sub_description">Tracke dein Arbeitsverhalten, und lerne dich selbst und deine Verhaltensweisen kennen</p>
                         </div>
                     </div>
                     <div class="row m-4">
-                        <img class="container col-lg-2 col-md-4 list_icon" src="{% static 'todo/images/icons/004-graph-2.png' %}" alt="Responsive image">
+                        <div class="container col-lg-2 col-md-4 icon">
+                            <i class="far fa-chart-bar fa-3x"></i>
+                        </div>
                         <div class="container col-lg-10 col-md-4 text-lg-left text-md-block align-baseline">
                             <h5 class="font-weight-bold">Optimierung des Zeitmanagement</h5>
                             <p class="font-weight-normal text-secondary sub_description">Erkenne deine Stärken und Schwächen im Zeitmanagement, werte dein Verhalten aus und werde zum Zeitmanagement Profi</p>
@@ -163,9 +160,9 @@
                             </p>
                             <a href="{% url 'register' %}" class="btn btn-primary mx-atuo">Werde jetzt Aktiv!</a>
                             <p class="font-weight-normal text-secondary text-center p-4 sub_small">
-                                Wenn du deinem Arbeitsweisen einen Boost geben möchtest und ein Tool suchst, dass dir dabei hilft,
+                                Wenn du deinen Arbeitsweisen einen Boost geben möchtest und ein Tool suchst, dass dir dabei hilft,
                                 dann ist Sloth genau das richtige für dich. Mit Sloth kannst du nicht nur deine Aufgaben organisieren sondern
-                                ganz nebenbei dein Verhalten optimeren und lernen, wie du in weniger Zeit mehr schaffen kannst. Ganz Individuell
+                                ganz nebenbei dein Verhalten optimeren und lernen, wie du in weniger Zeit mehr Dinge schaffen kannst. Ganz Individuell
                                 auf dich zugeschnitten!
                             </p>
                         </div>

@@ -1,0 +1,55 @@
+
+h5{
+	background: linear-gradient(-90deg, var(--lightblue), var(--glightblue));
+	color: #fff;
+	font-family: Microsoft Yi Baiti;
+}
+
+li .btn-group-left i{
+    padding: 1vh;
+    color: var(--lightgrey);
+    border-radius: 50%;
+    border: 1px solid var(--lightgrey);
+    background-color: #fff;
+}
+
+li .btn-group-left i:hover{
+    padding: 1vh;
+    color: #fff;
+    border-radius: 50%;
+    border: 1px solid var(--lightblue);
+    background-color: var(--lightblue);
+}
+
+li .btn-group-left a{
+    text-decoration: none;
+    color: rgba(255, 0, 0, 0);
+}
+
+li .btn-group-right i{
+    padding: 1vh;
+    color: var(--lightgrey);
+    border-radius: 50%;
+}
+
+li .btn-group-right i:hover{
+    padding: 1vh;
+    color: #fff;
+    border-radius: 50%;
+    background-color: var(--lightblue);
+}
+
+li .btn-group-right a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 0;
+}
+
+.fas{
+    font-size: initial;
+    margin-left: 1vh;
+}
+
+#check{
+    font-size: 0;
+}

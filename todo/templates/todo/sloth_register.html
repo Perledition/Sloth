@@ -20,6 +20,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
 
     <script type="text/javascript">
         jQuery(document).ready(function($){
@@ -68,6 +69,12 @@
         });
         </script>
 
+        <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        </script>
+
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
@@ -94,7 +101,7 @@
                 <div class="row">
                     <div class="container col-5 mx-auto">
                         <div class="col_3 input-effect">
-                            <tit>Dein Username</tit>
+                            <tit>Dein Username <i class="far fa-lightbulb" data-toggle="tooltip" data-placement="top" title="Es sind alle normalen Buchstaben und die Sonderzeichen @, ., +, -, und _ erlaubt."></i></tit>
                             {{ form.username|add_class:"effect-16"}}
                             <span class="focus-border"></span>
                         </div>
@@ -124,10 +131,11 @@
                             <span class="focus-border"></span>
                         </div>
                         <div class="col_3 input-effect">
-                            <tit>Dein Passwort</tit>
+                            <tit>Dein Passwort <i class="far fa-lightbulb" data-toggle="tooltip" data-placement="top" title="Dein Passwort benötigt mindestens 8 Zeichen mit mindestens einer Zahl."></i></tit>
                             {{ form.password1|add_class:"effect-16"}}
                             <span class="focus-border"></span>
                         </div>
+                        <p class='text-secondary'>{{ form.error }}</p>
                         <div class="col_3 input-effect">
                             <tit>Passwort Bestätigung</tit>
                             {{ form.password2|add_class:"effect-16"}}
@@ -166,6 +174,18 @@
                 <a href="#0" class="data-popup-close img-replace">Close</a>
             </div> <!-- cd-popup-container -->
         </div> <!-- cd-popup -->
+
+        <!-- jQuery first, then Bootstrap JS. -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="tether.js"></script>
+        <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
+        <script>
+        	$( function( )
+        	{
+        		$( "[data-toggle='tooltip']").tooltip( );
+        	} );
+        </script>
     </body>
     <footer>
         <svg id="footerwave" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1430 76.49">
@@ -213,6 +233,7 @@
                   </li>
                 </ul>
             </div>
+
         </div>
     </footer>
 </html>

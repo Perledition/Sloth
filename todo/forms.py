@@ -31,7 +31,7 @@ class TodoForm(forms.Form):
 
     project = forms.CharField(max_length=40)
 
-    hour = forms.ChoiceField(choices=[(x, x) for x in range(0, 25)])
+    hour = forms.ChoiceField(choices=[(x, x) for x in range(0, 24)])
 
     minutes = forms.ChoiceField(choices=[(x, x) for x in range(00, 60, 5)])
 

@@ -21,9 +21,10 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    url(r'^$', views.goto, name='sloth'),
     url(r'^sloth/', include('todo.urls')),
     url(r'^admin/', admin.site.urls),
-    #url(r'^api/todo/', include('todo.API.urls')),
+    # url(r'^api/todo/', include('todo.API.urls')),
 
 ]
 
