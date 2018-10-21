@@ -60,4 +60,7 @@ urlpatterns = [
     url(r'^Feedback/$', views.Feedback.as_view(), name='feedback'),
     url(r'^Feedback/info$', views.feedback_info, name='feedback_info'),
     url(r'^NewbieFeedback/$', views.FirstFeedback.as_view(), name='first_feedback'),
+
+    # 404 response
+    url(r'^PageNotFound/$', views.error404, name='404'),
 ]

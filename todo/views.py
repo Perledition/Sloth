@@ -262,8 +262,10 @@ class DetailTrophy(View):
         i = 0
         value = 0
         all_pro = Project.objects.filter(user=request.user)
-
-        trophy = Project.objects.get(pk=project_id)
+        try:
+            trophy = Project.objects.get(pk=project_id)
+        except:
+            return redirect('404')
         editform = ProjectForm(initial={'pro_title': trophy.pro_title, 'pro_desc': trophy.pro_desc})
 
         if trophy.user == request.user:
@@ -1191,3 +1193,7 @@ def username_present(username):
         return True
 
     return False
+
+
+def error404(request):
+    return render(request, 'todo/404_Page.html')

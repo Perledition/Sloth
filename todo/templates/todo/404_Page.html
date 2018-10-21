@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Sloth</title>
+    {% load staticfiles %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container col-lg-10 col-md-4 m-5 p-5">
+    <img src="{% static 'todo/images/error.png' %}" class="float-center m-5 p-5 align-middle avatar_profile" alt="Hoppala, dieser Fehler ist uns auch etwas peinlich" style="width:80%">
+    <h3 class="text-center text-secondary m-5 p-5">This is not the page you are looking for!</h3>
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Sloth</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="conteiner col-lg-12 col-md-6 text-center">
+    <img src="{% static 'todo/images/error.png' %}" class="text-center" alt="Hoppala, dieser Fehler ist uns auch etwas peinlich" style="width:40%">
+    <h3 class="text-center text-secondary m-5">Das ist nicht die Seite nach der Sie suchen!</h3>
+    <a class="btn btn-primary" href="{% url 'index' %}">Weiter gehen...., weiter gehen!</a>
+  </div>
+</body>
+</html>
