@@ -5,7 +5,7 @@ import pandas as pd
 from PIL import Image, ImageOps, ImageDraw
 from django.shortcuts import render, redirect, render_to_response
 from django.views.decorators.http import require_POST
-from django.views.generic import View, UpdateView
+from django.views.generic import View, UpdateView, ListView
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm, UserChangeForm
 from django.http import HttpResponseRedirect
@@ -14,6 +14,7 @@ import operator
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from .API.serializers import TodoSerializers
 
 
 from .forms import TodoForm, ItemForm, UserForm, UserLoginForm
@@ -124,11 +125,12 @@ def addTodo(request):
     #Sidebarfunktion
     form = TodoForm(request.POST)
     if request.method == 'POST':
-        if request.POST['date'] is None:
-            dead = date.today()
+        if request.POST['date'] is '':
+            task_dead = datetime.now().replace(hour=23, minute=59)
         else:
             dead = request.POST['date']
-        time = dead.split('-')
+            time = dead.split('-')
+            task_dead = datetime(int(time[0]), int(time[1]), int(time[2]), int(request.POST['hour']), int(request.POST['minutes']))
 
         eff = float(request.POST['task_eff_hour'])+(int(request.POST['task_eff_minutes'])/60)
 
@@ -137,7 +139,7 @@ def addTodo(request):
         project.task_set.create(task_title=request.POST['task_title'],
                                 task_imp=request.POST['task_imp'],
                                 task_explain=request.POST['task_explain'],
-                                task_dead=datetime(int(time[0]), int(time[1]), int(time[2]), int(request.POST['hour']), int(request.POST['minutes'])),
+                                task_dead= task_dead,
                                 task_eff=float(eff),
                                 user=request.user)
 
@@ -433,19 +435,6 @@ def checkItem(request, Item_id):#Anpassungsbedarf!
 
     # Anpassungsbedarf, der View soll zur richitgen Url redirecten, also zur Detailpage
     return redirect('/sloth/' + str(item.task.pk) + '/')
-
-
-# Vorzugsweise nutzen, sobald aussreichend Verständnis vorhanden ist.
-# class ChartData(APIView):
-#
-#    def get(self, request):
-#        labels=["Anteil der Aufgaben", "Anteil des Fortschritts"]
-#        data={
-#            "labels": labels,
-#            "default": [.2, .8],
-#            "major": [.8, .2],
-#        }
-#        return Response(data)
 
 
 # Statistik page
@@ -1126,6 +1115,13 @@ def feedback_info(request):
 
 def delete_info(request):
     return render(request, 'todo/information_delete.html')
+
+
+def datenschutz(request):
+    return render(request, 'todo/InfoFrame.html', {'value': 'datenschutz'})
+
+def Nutzung(request):
+    return render(request, 'todo/InfoFrame.html', {'value': 'Nutzung'})
 
 
 class Feedback(View):

@@ -5,7 +5,7 @@ from . import views
 
 
 
-# app_name='todo'
+app_name='todo'
 
 urlpatterns = [
     #todo urls
@@ -26,11 +26,8 @@ urlpatterns = [
     url(r'^trophy/add/create/$', views.createProject, name='create'),
     url(r'^trophy/$', views.TrophyIndex, name='trophy'),
 
-    # url(r'^api/chart/data/$', views.ChartData.as_view(), name='api-data'),
-
     # Statistik
     url(r'^stats/$', views.Stats.as_view(), name='stats'),
-
 
     # Learn
     url(r'^todo/learn_it$', views.Learn.as_view(), name='learn'),
@@ -52,14 +49,14 @@ urlpatterns = [
     #url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, name='password_reset_confirm'),
     #url(r'^reset-password/complete/$', password_reset_complete, name='password_reset_complete'),
 
-    # url(r'^api-auth/', include('rest_framework.urls')),
-
     # contact
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^contact/info/$', views.info, name='contact_info'),
     url(r'^Feedback/$', views.Feedback.as_view(), name='feedback'),
     url(r'^Feedback/info$', views.feedback_info, name='feedback_info'),
     url(r'^NewbieFeedback/$', views.FirstFeedback.as_view(), name='first_feedback'),
+    url(r'^Datenschutz/$', views.datenschutz, name='datenschutz'),
+    url(r'^Nutzung/$', views.Nutzung, name='Nutzung'),
 
     # 404 response
     url(r'^PageNotFound/$', views.error404, name='404'),

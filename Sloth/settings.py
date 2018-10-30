@@ -22,11 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '=0&*udn(mnjo8uhfn@_rpcm0!$^dof9l*hu!yqa0^%np@@$d7e'
 
+
+""" Es muss sichergestellt werden, dass DEBUG auf False eingestellt ist und der ALLOWED_HOSTS auf sloth-it steht, bevor ein Push zum Server erfolgt!"""
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
-ALLOWED_HOSTS = ['www.sloth-it.de']
+ALLOWED_HOSTS = []#'www.sloth-it.de']
 
 
 # Application definition
@@ -34,6 +36,7 @@ ALLOWED_HOSTS = ['www.sloth-it.de']
 INSTALLED_APPS = [
     'todo',
     'rest_framework',
+    'rest_framework.authtoken',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,11 +88,12 @@ DATABASES = {
 }
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
 
 
@@ -115,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de-at'
 
 TIME_ZONE = 'UTC'
 
@@ -133,5 +137,3 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/Perledition/Sloth/static'
 MEDIA_ROOT = '/home/Perledition/Sloth/media'
 MEDIA_URL = '/media/'
-
-
