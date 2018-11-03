@@ -96,7 +96,7 @@
         </div>
         <div class="container col-10 mx-auto" id="box1">
             {% load widget_tweaks %}
-            <form class="reginput" role="form" action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+            <form class="reginput" role="form" action="{% url 'todo:register' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.error}}
                 <p><a class="msg">{{msg}}</a></p>
@@ -120,7 +120,7 @@
                         <div>
                         <input class="hide_me" name="agree" type="checkbox" value="False" checked>
                         </div>
-                        <a href="{% url 'login' %}" class="font-weight-light mr-2">Du hast schon einen Account?</a>
+                        <a href="{% url 'todo:login' %}" class="font-weight-light mr-2">Du hast schon einen Account?</a>
                     </div>
                     <div class="container col-5 mx-auto">
                         <div class="col_3 input-effect">

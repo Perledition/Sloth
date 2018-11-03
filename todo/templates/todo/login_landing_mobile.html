@@ -81,7 +81,7 @@
             <div class="container col-10 p-5 text-center">
             <h1 class="font-weight-bold text-center font-weight-bold">MACH WAS DICH WIRKLICH VORAN BRINGT!</h1>
             <p class="font-weight-normal text-secondary text-center p-4 sub_small">Organisiere mit Sloth deine Aufgaben und verbessere dein Zeitmanagement</p>
-            <a href="{% url 'register' %}" class="btn btn-primary mx-atuo">Starte jetzt!</a>
+            <a href="{% url 'todo:register' %}" class="btn btn-primary mx-atuo">Starte jetzt!</a>
         </div>
             <!-- Wellen Design Screenshot -->
         <section class="container-fluid text-center align-bottom banner" id="wave">
@@ -142,12 +142,12 @@
                 <div class="container col-lg-5 col-md-4 border-right border-light">
                     <h2 class="text-white">Dein Feedback zählt</h2>
                     <p class="text-white">Wir gestalten diese Platform für Menschen wie dich!<br>Dein Feedback hilft uns dabei diese Seite mehr an deine Bedürfnisse anzupassen</p>
-                    <a href="{% url 'first_feedback'%}" class="btn btn-outline-light">Gib deinen Senf dazu!</a>
+                    <a href="{% url 'todo:first_feedback'%}" class="btn btn-outline-light">Gib deinen Senf dazu!</a>
                 </div>
                 <div class="container col-lg-5 col-md-4">
                     <h2 class="text-white">Sloth. Newsletter</h2>
                     <p class="text-white">Kein Spam. und jederzeit kündbar. Bleib über Updates und Entwicklungen informiert.<br>Dein Feature-Vorschlag ist vielleicht der nächste!</p>
-                    <form action="{% url 'contact' %}" method="POST" role="form">
+                    <form action="{% url 'todo:contact' %}" method="POST" role="form">
                         <div class="input-group col-lg-6 col-md-4 col-centered">
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{ request.path }}">
@@ -171,7 +171,7 @@
                                 Gestalte deine Aufgaben anpassbar, arbeite mit Checklisten, Kommentaren und anderen Features um jederzeit
                                 auf dem aktuellen Stand zu sein
                             </p>
-                            <a href="{% url 'register' %}" class="btn btn-primary mx-atuo">Werde jetzt Aktiv!</a>
+                            <a href="{% url 'todo:register' %}" class="btn btn-primary mx-atuo">Werde jetzt Aktiv!</a>
                             <p class="font-weight-normal text-secondary text-center p-4 sub_small">
                                 Wenn du deinen Arbeitsweisen einen Boost geben möchtest und ein Tool suchst, dass dir dabei hilft,
                                 dann ist Sloth genau das richtige für dich. Mit Sloth kannst du nicht nur deine Aufgaben organisieren sondern
@@ -210,7 +210,7 @@
                 <div class="container col align-baseline">
                     <h2 class="font-weight-bold text-center">Sloth ist für deinen Erfolg da!</h2>
                     <p class="font-weight-normal text-secondary text-center p-4 sub_small">Beginne jetzt, mit einer einfachen, strukturierten und erfolgsorientierten Arbeitsweise</p>
-                    <a href="{% url 'register' %}" class="btn btn-primary mx-atuo">Werde zum Slothy!</a>
+                    <a href="{% url 'todo:register' %}" class="btn btn-primary mx-atuo">Werde zum Slothy!</a>
                     <p class="font-weight-normal text-secondary text-center p-4 sub_small">
                         Sloth ist großartig einfach, kostenlos und für jeden zugänglich. Solltest du Sloth widererwartet nicht mögen oder nicht nutzen, dann kannst du deinen
                         Account und deine Daten jederzeit vollständig löschen!
@@ -244,10 +244,10 @@
                                     <span class="focus-border"></span>
                                 </div>
                                 <div class="container col-6">
-                                    <button type="submit" action="{% url 'login' %}" class="btn btn-outline-primary btn-block">Login</button>
+                                    <button type="submit" action="{% url 'todo:login' %}" class="btn btn-outline-primary btn-block">Login</button>
                                 </div>
                                 <div class="container col-10 mx-auto" id="linkbox">
-                                    <a href="{% url 'register' %}" class="links">Neu hier? Dann registier dich hier!</a><br>
+                                    <a href="{% url 'todo:register' %}" class="links">Neu hier? Dann registier dich hier!</a><br>
                                     <a href="#" class="links">Passwort vergessen?</a>
                                 </div>
                             </form>
@@ -276,7 +276,7 @@
                     <p  class="text-secondary">Sloth steht noch ganz am Anfang, deshalb sei also bitte nicht enttäuscht, wenn wir dir nicht sofort antworten können</p>
                 </div>
                 <!-- Newsletter -->
-                <form class="container col-lg-4 col-md-12 border-right mx-auto" action="{% url 'contact' %}" method="POST" role="form">
+                <form class="container col-lg-4 col-md-12 border-right mx-auto" action="{% url 'todo:contact' %}" method="POST" role="form">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
                     <p class="text-secondary">Newsletter</p>
@@ -292,7 +292,7 @@
                 <div class="container col-lg-4 col-md-12 align-bottom mx-auto">
                     <p class="text-secondary">Feedback</p>
                     <p class="text-secondary">Wir gestalten diese Platform für Menschen wie dich!<br>Dein Feedback hilft uns dabei diese Seite mehr an deine Bedürfnisse anzupassen</p>
-                    <a href="{% url 'feedback' %}" class="btn btn-secondary">Gib deinen Senf dazu!</a>
+                    <a href="{% url 'todo:feedback' %}" class="btn btn-secondary">Gib deinen Senf dazu!</a>
                 </div>
             </div>
             <div class="row p-2">

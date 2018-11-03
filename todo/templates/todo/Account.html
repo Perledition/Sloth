@@ -67,12 +67,12 @@
             <div class="container col-10 mx-auto">
                 <p class="text-secondary p-5">Passwort neu setzen</p>
                 <div class="container-fluid">
-                    <a href="{% url 'change_password' %}" class="btn btn-outline-primary float-right">Passwort verändern</a>
+                    <a href="{% url 'todo:change_password' %}" class="btn btn-outline-primary float-right">Passwort verändern</a>
                 </div>
             </div>
             <div class="container col-10 mx-auto">
                 <p class="text-secondary p-5">Account löschen</p>
-                <form class="reginput" role="form" action="{% url 'account_delete' %}" method="post">
+                <form class="reginput" role="form" action="{% url 'todo:account_delete' %}" method="post">
                     {% csrf_token %}
                     <div class="col_3 input-effect">
                         <input class="effect-16" id="inputPassword" type="password" name="password" placeholder="Bestätige den Löschvorgang mit deinem Passwort">

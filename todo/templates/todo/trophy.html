@@ -19,12 +19,12 @@
                 <li class="box">
                     <div class="mockup">
                         <div class="overlay">
-                            <div class="text"><a href="{% url 'pro' project.id %}">{{project.pro_desc}}</a></div>
+                            <div class="text"><a href="{% url 'todo:pro' project.id %}">{{project.pro_desc}}</a></div>
                         </div>
                         <img src="{{project.pro_pic.url}}">
                     </div>
-                    <a href="{% url 'pro' project.id %}" class="ml-2 text-dark align-baseline">{{project.pro_title}}</a>
-                    <a href="{% url 'trophy-delete' project.id %}" class="float-right delete-btn"><i class="fas fa-trash"></i></a>
+                    <a href="{% url 'todo:pro' project.id %}" class="ml-2 text-dark align-baseline">{{project.pro_title}}</a>
+                    <a href="{% url 'todo:trophy-delete' project.id %}" class="float-right delete-btn"><i class="fas fa-trash"></i></a>
                 </li>
                 {% else %}
                 {% endif %}
@@ -48,7 +48,7 @@
                     <div class="container-fluid" id="topline">
                       <h8>Erstelle ein neues Projekt</h8>
                     </div>
-                    <form action="{% url 'create'%}" method="POST" role="form" enctype="multipart/form-data">
+                    <form action="{% url 'todo:create'%}" method="POST" role="form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="custom-file col-8 mx-auto m-5">
                             <div class="col_3 input-effect">

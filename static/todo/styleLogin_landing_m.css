@@ -112,8 +112,8 @@ html, body, footer {
     font-size: 1.8vh;
 }
 
-.icon i{
-    color: var(--midlight);
+.list_icon{
+    size: 60%;
 }
 
 .sub_small{

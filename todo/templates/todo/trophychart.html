@@ -13,13 +13,13 @@
         <div class="row">
             <div class="panel panel-primary p-4 rounded col-10 mx-auto" id="buttons">
                 {% if many == count %}
-                <a href="{% url 'trophy-done' trophy.id %}" class="btn btn-outline-primary"><i class="fas fa-check"></i> Projekt abschließen</a>
+                <a href="{% url 'todo:trophy-done' trophy.id %}" class="btn btn-outline-primary"><i class="fas fa-check"></i> Projekt abschließen</a>
                 {% else %}
                 <a class="align-middle open"><i class="fas fa-check"></i> Projekt abschließen</a>
                 {% endif%}
                 <a href="#" class="btn btn-outline-secondary pareto-popup-trigger"><i class="fas fa-chart-pie"></i> Pareto</a>
-                <a href="{% url 'index'%}" class="btn btn-outline-secondary"><i class="fas fa-tasks"></i> Zurück zum Dashboard</a>
-                <a href="{% url 'trophy-delete' trophy.id %}" class="float-right delete_btn"><i class="fas fa-trash"></i></a>
+                <a href="{% url 'todo:index'%}" class="btn btn-outline-secondary"><i class="fas fa-tasks"></i> Zurück zum Dashboard</a>
+                <a href="{% url 'todo:trophy-delete' trophy.id %}" class="float-right delete_btn"><i class="fas fa-trash"></i></a>
             </div>
         </div>
         <div class="row">

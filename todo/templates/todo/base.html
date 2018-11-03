@@ -237,7 +237,7 @@
           <h8 id="sb">Neue Aufgabe</h8>
         </div>
         <p></p>
-        <form action="{% url 'add'%}" method="POST" role="form">
+        <form action="{% url 'todo:add'%}" method="POST" role="form">
             {% csrf_token %}
             <div class="container-fluid form-group">
                 <div class="input-group">
@@ -313,12 +313,12 @@
 <!-- Navbar-->
     <nav class="navbar  navbar-expand-md navbar-light bg-light mx-auto ml-2 mr-2">
         <ul class="nav navbar-nav mx-auto" >
-            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'index' %}"><i class="fas fa-tasks" ></i> DASHBOARD</a></li>
-            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'stats' %}"><i class="fas fa-chart-bar" ></i> STATISTIK</a></li>
-            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'trophy' %}"><i class="fas fa-trophy" ></i> PROJEKTE   </a></li>
-            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'learn' %}"><i class="fas fa-graduation-cap" ></i>LERNEN    </a></li>
-            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'account' %}"><i class="fas fa-id-badge" ></i> ACCOUNT   </a></li>
-            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'logout'%}"><i class="fas fa-power-off" ></i> LOGOUT </a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'todo:index' %}"><i class="fas fa-tasks" ></i> DASHBOARD</a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'todo:stats' %}"><i class="fas fa-chart-bar" ></i> STATISTIK</a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'todo:trophy' %}"><i class="fas fa-trophy" ></i> PROJEKTE   </a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'todo:learn' %}"><i class="fas fa-graduation-cap" ></i>LERNEN    </a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'todo:account' %}"><i class="fas fa-id-badge" ></i> ACCOUNT   </a></li>
+            <li class="nav-item p-2 m-2 mx-auto"><a class="nav-link" href="{% url 'todo:logout'%}"><i class="fas fa-power-off" ></i> LOGOUT </a></li>
         </ul>
     </nav>
 
@@ -346,7 +346,7 @@
                 <p  class="text-secondary">Sloth steht noch ganz am Anfang, deshalb sei also bitte nicht enttäuscht, wenn wir dir nicht sofort antworten können</p>
             </div>
             <!-- Newsletter -->
-            <form class="container col-lg-4 col-md-12 border-right mx-auto" action="{% url 'contact' %}" method="POST" role="form">
+            <form class="container col-lg-4 col-md-12 border-right mx-auto" action="{% url 'todo:contact' %}" method="POST" role="form">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
                 <p class="text-secondary">Newsletter</p>
@@ -362,7 +362,7 @@
             <div class="container col-lg-4 col-md-12 align-bottom mx-auto">
                 <p class="text-secondary">Feedback</p>
                 <p class="text-secondary">Wir gestalten diese Platform für Menschen wie dich!<br>Dein Feedback hilft uns dabei diese Seite mehr an deine Bedürfnisse anzupassen</p>
-                <a href="{% url 'feedback' %}" class="btn btn-secondary">Gib deinen Senf dazu!</a>
+                <a href="{% url 'todo:feedback' %}" class="btn btn-secondary">Gib deinen Senf dazu!</a>
             </div>
         </div>
         <div class="row p-2">

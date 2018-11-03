@@ -65,9 +65,9 @@ class Dashboard(View):
 
                 return render(request, self.template_name, {'wd': wd, 'wnd': wnd, 'nwd': nwd,'nwnd': nwnd, 'form':form, 'all_pro':all_pro})
             else:
-                return redirect('login')
+                return redirect('todo:login')
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
     def post(self, request):
         form = self.form_class(None)
@@ -178,7 +178,7 @@ class TodoDetail(View):
                                                         'Items': items, 'ItemInput': item_input, 'eff': eff, 'chat': chat,
                                                         'checked': items_done, 'sum': csum})
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
     # modifizierungsfunktion für Aufgaben
     def post(self, request, todo_id):
@@ -205,7 +205,7 @@ class TodoDetail(View):
                 next = request.POST['next']
             return redirect(next)
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
 
 # Detailansicht für die einzelenen Aufgaben
@@ -219,7 +219,7 @@ def completeTodo(request, todo_id):
     todo.task_end = datetime.now()
     todo.save()
 
-    return redirect('index')
+    return redirect('todo:index')
 
 
 # todo löschen
@@ -229,9 +229,9 @@ def deleteTodo(request, todo_id):
         todo = Task.objects.get(pk=todo_id)
         todo.delete()
 
-        return redirect('index')
+        return redirect('todo:index')
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 
 # Ansicht Trophypage
@@ -243,7 +243,7 @@ def TrophyIndex(request):
 
         return render(request, template_name, {'all_pro': all_pro, 'form': form})
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 
 class DetailTrophy(View):
@@ -267,7 +267,7 @@ class DetailTrophy(View):
         try:
             trophy = Project.objects.get(pk=project_id)
         except:
-            return redirect('404')
+            return redirect('todo:404')
         editform = ProjectForm(initial={'pro_title': trophy.pro_title, 'pro_desc': trophy.pro_desc})
 
         if trophy.user == request.user:
@@ -324,7 +324,7 @@ class DetailTrophy(View):
                                                         'reto': reto, 'dopart': dopart, 'perpart': perpart, 'editform': editform,
                                                         'SeriesDates': Series[0], 'SeriesValues': Series[1]})
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
     def pro_activity(self, request, project_id):
         trophy = Project.objects.get(pk=project_id)
@@ -359,7 +359,7 @@ class DetailTrophy(View):
                 return redirect(next)
 
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
 
 def createProject(request):
@@ -376,7 +376,7 @@ def createProject(request):
             new_pro.user = request.user
             new_pro.save()
 
-    return redirect('trophy')
+    return redirect('todo:trophy')
 
 
 def delete_Trophy(request, project_id):
@@ -384,9 +384,9 @@ def delete_Trophy(request, project_id):
     if project.user == request.user:
         project.delete()
         # project = Project.objects.filter(user=request.user)
-        return redirect('trophy')
+        return redirect('todo:trophy')
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 
 def done_Trophy(request, project_id):
@@ -394,9 +394,9 @@ def done_Trophy(request, project_id):
     if project.user == request.user:
         project.pro_complete = True
         project.save()
-        return redirect('trophy')
+        return redirect('todo:trophy')
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 @require_POST
 def addItem(request, todo_id):
@@ -523,7 +523,7 @@ class Stats(View):
 
                                                         })
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
     def post(self, request):
 
@@ -624,7 +624,7 @@ class Stats(View):
 
                                                         })
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
     def get_bubble_df(self, request, s_range, e_range):
         # erstellt einen df für die Auswertung des BubbleChart
@@ -833,7 +833,7 @@ class Learn(View):
             dislikes = LearnLike.objects.filter(like=False).count()
             return render(request, self.template_name, {'like': likes, 'dislike': dislikes, 'form': self.form_class, 'all_pro': all_pro, })
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
 
 def like(request):
@@ -850,9 +850,9 @@ def like(request):
             model.like = True
             model.save()
 
-        return redirect('learn')
+        return redirect('todo:learn')
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 
 def dislike(request):
@@ -868,9 +868,9 @@ def dislike(request):
             model.user = request.user
             model.like = False
             model.save()
-        return redirect('learn')
+        return redirect('todo:learn')
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 
 # Alle Aktionen zur Erstellung oder Verifizierung von Accounts
@@ -890,7 +890,7 @@ def UserFormView(request):
                     login(request, user)
                     trophy = Project(pro_title="Kein Projekt", user=request.user)
                     trophy.save()
-                    return redirect('index')
+                    return redirect('todo:index')
         else:
             return render(request, template_name, {'form': form})
     else:
@@ -948,7 +948,7 @@ class Registration(View):
                                     task_eff=0.25,
                                     user=request.user)
 
-                                return redirect('index')
+                                return redirect('todo:index')
                         else:
                             return render(request, self.template_name, {'form': form})
                     else:
@@ -983,7 +983,7 @@ class LoginUser(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('index')
+                    return redirect('todo:index')
                 else:
                     return render(request, self.template_name, {'error_message': 'Dein Account ist zur Zeit nicht aktiv!', 'form': form})
             else:
@@ -994,7 +994,7 @@ class LoginUser(View):
 
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('todo:login')
 
 
 class UserAccount(View):
@@ -1035,7 +1035,7 @@ class UserAccount(View):
                 return render(request, self.template_name, {'form': form, 'msg': msg})
 
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
     def crop_to_png(self, picture, username):
         size = (300, 300)
@@ -1061,7 +1061,7 @@ class ChangePassword(View):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('account')
+            return redirect('todo:account')
         else:
             error='Da ist etwas scheif gegangen. Versuch es nochmal'
             return render(request, self.template_name, {'error':error, 'form':form})
@@ -1073,14 +1073,14 @@ def delete_user(request):
             user = authenticate(username=request.user.username, password=request.POST['password'])
             if user is not None:
                 user.delete()
-                return redirect('delete_info')
+                return redirect('todo:delete_info')
             else:
-                return redirect('login')
+                return redirect('todo:login')
         else:
             print(request.POST['password'])
-            return redirect('account')
+            return redirect('todo:account')
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 
 # Kontakt und Informationen
@@ -1093,16 +1093,16 @@ def contact(request):
         if request.POST['contact'] != '':
                 exist = Subscriber.objects.filter(email=request.POST['contact']).count()
                 if exist >= 1:
-                    return redirect('contact_info')
+                    return redirect('todo:contact_info')
 
                 else:
                     contact.email = request.POST['contact']
                     contact.save()
-                    return redirect('contact')
+                    return redirect('todo:contact')
         else:
             return redirect(next)
     else:
-        return redirect('login')
+        return redirect('todo:login')
 
 
 def info(request):
@@ -1131,7 +1131,7 @@ class Feedback(View):
         if request.user.is_authenticated:
             return render(request, self.template_name)
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
     def post(self, request):
         if request.user.is_authenticated:
@@ -1144,7 +1144,7 @@ class Feedback(View):
                     feedback.like = request.POST['like']
                     feedback.post_time = datetime.now().replace(tzinfo=timezone.utc).astimezone(tz=None)
                     feedback.save()
-                    return redirect('feedback_info')
+                    return redirect('todo:feedback_info')
 
                 except UserFeed.DoesNotExist:
                     feedback = UserFeed()
@@ -1155,12 +1155,12 @@ class Feedback(View):
                     feedback.user = request.user
                     feedback.post_time = datetime.now().replace(tzinfo=timezone.utc).astimezone(tz=None)
                     feedback.save()
-                    return redirect('feedback_info')
+                    return redirect('todo:feedback_info')
 
             else:
                 return render(request, self.template_name)
         else:
-            return redirect('login')
+            return redirect('todo:login')
 
 
 class FirstFeedback(View):
@@ -1178,7 +1178,7 @@ class FirstFeedback(View):
             feedback.how = request.POST['how']
             feedback.post_time = datetime.now().replace(tzinfo=timezone.utc).astimezone(tz=None)
             feedback.save()
-            return redirect('feedback_info')
+            return redirect('todo:feedback_info')
 
         else:
             return render(request, self.template_name)

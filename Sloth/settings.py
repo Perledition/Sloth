@@ -25,10 +25,10 @@ SECRET_KEY = '=0&*udn(mnjo8uhfn@_rpcm0!$^dof9l*hu!yqa0^%np@@$d7e'
 
 """ Es muss sichergestellt werden, dass DEBUG auf False eingestellt ist und der ALLOWED_HOSTS auf sloth-it steht, bevor ein Push zum Server erfolgt!"""
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
-ALLOWED_HOSTS = []#'www.sloth-it.de']
+ALLOWED_HOSTS = ['www.sloth-it.de']
 
 
 # Application definition

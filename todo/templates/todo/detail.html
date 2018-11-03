@@ -14,13 +14,13 @@
         </div>
         <div class="row">
             <div class="panel panel-primary p-4 rounded col-10 mx-auto" id="buttons">
-                <a href="{% url 'complete' todo.id %}" class="btn btn-outline-primary"><i class="fas fa-check"></i> Aufgabe abschließen</a>
+                <a href="{% url 'todo:complete' todo.id %}" class="btn btn-outline-primary"><i class="fas fa-check"></i> Aufgabe abschließen</a>
                 {% if todo.project.pro_title == 'Kein Projekt' %}
                 {% else %}
-                <a href="{% url 'pro' todo.project.id %}" class="btn btn-outline-secondary"><i class="fas fa-trophy"></i> Zum Projekt</a>
+                <a href="{% url 'todo:pro' todo.project.id %}" class="btn btn-outline-secondary"><i class="fas fa-trophy"></i> Zum Projekt</a>
                 {% endif %}
-                <a href="{% url 'index'%}" class="btn btn-outline-secondary"><i class="fas fa-tasks"></i> Zurück zum Dashboard</a>
-                <a href="{% url 'delete' todo.id%}" class="float-right delete_btn"><i class="fas fa-trash"></i></a>
+                <a href="{% url 'todo:index'%}" class="btn btn-outline-secondary"><i class="fas fa-tasks"></i> Zurück zum Dashboard</a>
+                <a href="{% url 'todo:delete' todo.id%}" class="float-right delete_btn"><i class="fas fa-trash"></i></a>
             </div>
         </div>
         <!-- Beschreibung und  Paramenter -->
@@ -142,7 +142,7 @@
                         <ul>
                             {% for item in Items %}
                             {% if item.checked == False%}
-                            <li class="list-item"><i class="far fa-square"></i>&nbsp<a href="{% url 'checkItem' item.id %}">{{item.Item_title}}</a></li>
+                            <li class="list-item"><i class="far fa-square"></i>&nbsp<a href="{% url 'todo:checkItem' item.id %}">{{item.Item_title}}</a></li>
                             {% else %}
                             <li class="list-item"><i class="fas fa-check-square"></i></i>&nbsp<a class="text-secondary" href="#"><s>{{item.Item_title}}</s></a>
                                 <b class="hide_me">{{todo.id}}</b></li>
@@ -150,7 +150,7 @@
                             {% endfor%}
                         </ul>
                     </div>
-                    <form class="post" action="{% url 'addItem' todo.id%}" method="POST" role="form">
+                    <form class="post" action="{% url 'todo:addItem' todo.id%}" method="POST" role="form">
                         {% csrf_token %}
                         <div class="input-group mb-3" id="inputGroup-sizing-default">
                             <input type="text" class="form-control" name="ItemInput" placeholder="Füge deiner Checkliste etwas hinzu" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -182,7 +182,7 @@
                             </div>
                             {% endfor%}
                         </div>
-                        <form class="post" action="{% url 'addmsg' todo.id%}" method="POST" role="form">
+                        <form class="post" action="{% url 'todo:addmsg' todo.id%}" method="POST" role="form">
                             {% csrf_token %}
                             <div class="input-group mb-3" id="inputGroup-sizing-default">
                                 <input type="text" class="form-control" name="msg_text" placeholder="Kommentar eingeben" aria-label="Recipient's username" aria-describedby="basic-addon2">
